@@ -45,6 +45,7 @@ INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 # REST API
 ## /api/get_token
 Что делает: **Возвращает рандомный токен для работы с API**
+
 Методы: **GET**
 
 ### GET
@@ -58,6 +59,7 @@ INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 
 ## /api/<YOUR_TOKEN>/note
 Что делает: **Возвращает список id записей пользователя / Создает новую запись**
+
 Методы: **GET POST**
 
 ### GET
@@ -101,6 +103,7 @@ INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 
 ## /api/<YOUR_TOKEN>/note/<NOTE_ID>
 Что делает: **Возвращает детали записи / Изменяет существующую запись / Удаляет запись**
+
 Методы: **GET PATCH DELETE**
 
 ### GET
