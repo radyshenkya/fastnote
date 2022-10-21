@@ -88,6 +88,30 @@ def update_note(
     return {"ok": True}
 
 
+# DELETE /api/{token}/note/{id}
+@app.delete(API_PREFIX + "{token}/note/{id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_note(token: str, id: str):
+    note = None
+
+    try:
+        note = notes.get_by_id(id)
+    except Exception as e:
+        return JSONResponse(
+            content={"error": "Can not find this note"},
+            status_code=status.HTTP_404_NOT_FOUND,
+        )
+
+    if not note.is_owner(token):
+        return JSONResponse(
+            content={"error": "Can not modify this note"},
+            status_code=status.HTTP_403_FORBIDDEN,
+        )
+
+    notes.delete_note(note)
+
+    return {"ok": True}
+
+
 # DEFAULT PAGES
 # GET /
 @app.get("/")
@@ -109,5 +133,9 @@ def note_details(request: Request, note_id: str):
         note = None
 
     return templates.TemplateResponse(
-        "note_details.html", {"request": request, "error": error, "note": note}
+        "note_details.html",
+        {"request": request, "error": error, "note": note},
+        status_code=status.HTTP_200_OK
+        if not note is None
+        else status.HTTP_404_NOT_FOUND,
     )
