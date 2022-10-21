@@ -1,0 +1,244 @@
+/*
+font-family: 'Montserrat', sans-serif; 
+font-family: 'Open Sans', sans-serif;
+*/
+
+/* Тут переменные */
+
+:root {
+    --bg-color: #202124;
+    --bg-footer-color: #37393D;
+
+    --primary-color: #D34F73;
+    --secondary-color: #06BA63;
+    --main-text: #FFF;
+    --secondary-text: #9A9FA6;
+}
+
+/* Общие классы */
+
+.primary-color {
+    color: var(--primary-color);
+}
+
+.secondary-color {
+    color: var(--secondary-color);
+}
+
+.secondary-text {
+    color: var(--secondary-text);
+}
+
+.main-text {
+    color: var(--main-text);
+}
+
+.font-size-40 {
+    font-size: 40px;
+}
+
+.font-size-35 {
+    font-size: 35px;
+}
+
+.font-size-30 {
+    font-size: 30px;
+}
+
+.font-size-25 {
+    font-size: 25px;
+}
+
+.font-size-20 {
+    font-size: 20px;
+}
+
+.font-size-15 {
+    font-size: 15px;
+}
+
+.font-weight-regular {
+    font-weight: 400;
+}
+
+.font-weight-semibold {
+    font-weight: 600;
+}
+
+.font-weight-bold {
+    font-weight: 700;
+}
+
+.font-weight-extrabold {
+    font-weight: 800;
+}
+
+.on-hover-primary-color {
+    transition: color 0.3s ease;
+}
+
+.on-hover-primary-color:hover {
+    
+    color: var(--primary-color);
+}
+
+.a-reset {
+    color: var(--main-text);
+    text-decoration: none;
+}
+
+.container {
+    padding-left: 370px;
+    padding-right: 370px;
+}
+
+.flex-horizontal {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 35px;
+}
+
+h3 {
+    font-size: 30px;
+}
+
+h4 {
+    font-size: 25px;
+}
+
+h5 {
+    font-size: 20px;
+}
+
+h6 {
+    font-size: 15px;
+}
+
+/* Локальные классы */
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--bg-color);
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.header>div>h1 {
+    display: inline;
+    font-family: 'Montserrat', sans-serif; 
+}
+
+.header-nav {
+    align-self: flex-end;
+}
+
+.header-nav-a {
+    margin-left: 40px;
+    text-decoration: none;
+}
+
+.content {
+    padding-top: 50px;
+    padding-bottom: 100px;
+    flex-grow: 1;
+}
+
+.footer {
+    background-color: var(--bg-footer-color);
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.footer-nav-a {
+    line-height: 36px;
+    text-decoration: none;
+}
+
+/* Profile markdown */
+.profile-info-markdown {
+    line-height: 40px;
+    font-size: 25px;
+}
+
+.profile-info-markdown img {
+    max-width: 700px;
+    border-radius: 40px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.profile-info-markdown * {
+    line-height: 130%;
+}
+
+.profile-info-markdown a {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    color: var(--secondary-text);
+    text-decoration: none;
+    position: relative;
+
+    transition: color 0.5s;
+}
+
+.profile-info-markdown a:hover {
+    color: var(--primary-color);
+}
+
+.profile-info-markdown>hr {
+    border: 1px solid var(--bg-footer-color);
+}
+
+.profile-info-markdown>table>tbody>tr>td {
+    border: 2px solid var(--bg-footer-color);
+    padding: 5px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 16px 23px;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.5s, border-color 0.5s;
+}
+
+.btn:hover {
+    color: var(--main-text-color);
+    border-color: var(--main-text-color);
+}
+
+input.btn {
+    cursor:auto;
+    color: var(--main-text-color);
+    padding: 10px 17px;
+    border-color: var(--secondary-color);
+    background-color: rgba(0,0,0,0);
+}
+
+.error {
+    font-size: 20px;
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 20px;
+    background-color: rgba(211, 79, 79, 0.404);
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/static/css/reset.css"/>
+    <link rel="stylesheet" href="/static/css/main.css"/>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet"> 
+
+    <title>{% block title %}Default Title{% endblock title %}</title>
+</head>
+<body>
+    <header class="header">
+        <div class="container flex-horizontal">
+            <h1 class="font-size-40"><a href="/" class="a-reset"><span class="font-weight-extrabold primary-color">Fast</span> <span class="font-weight-regular secondary-color">Note</span></a></h1>
+        </div>
+    </header>
+    {% if error %}
+    <section class="errors">
+        <div class="container main-text">
+            <div class="error">Ошибка: {{ error }}</div>
+        </div>
+    </section>
+    {% endif %}
+    <section class="content">
+        <div class="container main-text">{% block content %}Default content{% endblock content%}</div>
+    </section>
+
+    <footer class="footer">
+        <div class="container font-size-25">
+            <nav class="footer-nav">
+                <a href="https://t.me/c4pslokk" class="footer-nav-a secondary-text on-hover-primary-color">Телеграм автора</a>
+            </nav>
+        </div>
+    </footer>
+    <!-- markdown parser -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.js"></script>
+    <script src="/static/js/markdown_parse.js"></script>
+</body>
+</html>

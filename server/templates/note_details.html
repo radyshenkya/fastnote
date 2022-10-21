@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %} NoteBin {% endblock title %}
+{% block content %}
+{% if note %}
+<div class="markdown-parse profile-info-markdown">
+{{ note.text }}
+</div>
+{% endif %}
+{% endblock content %}

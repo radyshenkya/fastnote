@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %} NoteBin {% endblock title %}
+{% block content %}
+<div class="search-form">
+    <input id="note-id" class="btn" placeholder="ID Записки" type="text"/>
+    <a class="btn" id="search-btn">Найти</a>
+</div>
+
+<script>
+    $(document).ready(() => {
+        $("#search-btn").click(() => {
+            let note_id = $("#note-id").val();
+            if (note_id != "") {
+                window.location.href = "/" + note_id;
+            }
+        })
+    });
+</script>
+{% endblock content %}
