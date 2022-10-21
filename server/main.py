@@ -57,8 +57,8 @@ def get_note_details(token: str, id: str):
 # POST /api/{token}/note/ BODY: json object like {"text": "text", "is_private": false}
 @app.post(API_PREFIX + "{token}/note", status_code=status.HTTP_201_CREATED)
 def add_note(token: str, text=Body(), is_private=Body()):
-    notes.new_note(token, text, bool(is_private))
-    return {"ok": True}
+    note = notes.new_note(token, text, bool(is_private))
+    return {"id": note.get_id()}
 
 
 # PATCH /api/{token}/note/{id} BODY: json object like {"text": "text", "is_private": false}
