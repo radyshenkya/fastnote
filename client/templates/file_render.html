@@ -1,0 +1,46 @@
+<head>
+    <style>
+        :root {
+            --bg-color: #202124;
+            --bg-footer-color: #37393D;
+
+            --primary-color: #D34F73;
+            --secondary-color: #06BA63;
+            --main-text: #FFF;
+            --secondary-text: #9A9FA6;
+        }
+
+        body {
+            color: var(--main-text);
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--bg-color);
+        }
+
+        a {
+            color: var(--secondary-text);
+            transition: color 0.5s;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        hr {
+            border: 1px solid var(--bg-footer-color);
+        }
+
+        blockquote {
+            color: var(--secondary-text);
+        }
+
+        img {
+            max-width: 700px;
+            border-radius: 40px;
+            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+{{ content }}
+</body>
