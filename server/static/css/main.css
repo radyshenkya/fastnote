@@ -230,7 +230,7 @@ body {
 input.btn {
     cursor:auto;
     color: var(--main-text-color);
-    padding: 10px 17px;
+    padding: 13px 17px;
     border-color: var(--secondary-color);
     background-color: rgba(0,0,0,0);
 }
