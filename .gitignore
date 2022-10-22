@@ -1,5 +1,6 @@
 *.db
 .vscode
+delete_all_packages.sh
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

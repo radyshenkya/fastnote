@@ -13,17 +13,34 @@
   <property name="windowTitle">
    <string>Fast Note</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">* {
+	background-color: rgb(55, 57, 61);
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <layout class="QHBoxLayout" name="main_layout">
       <item>
        <widget class="QPlainTextEdit" name="edit_panel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
           <width>400</width>
           <height>0</height>
          </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">* {
+	background-color: rgb(32, 33, 36);
+	color: #fff;
+}</string>
         </property>
        </widget>
       </item>
@@ -31,17 +48,6 @@
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>834</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

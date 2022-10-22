@@ -13,6 +13,9 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(834, 758)
+        MainWindow.setStyleSheet("* {\n"
+"    background-color: rgb(55, 57, 61);\n"
+"}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -20,18 +23,20 @@ class Ui_MainWindow(object):
         self.main_layout = QtWidgets.QHBoxLayout()
         self.main_layout.setObjectName("main_layout")
         self.edit_panel = QtWidgets.QPlainTextEdit(self.centralwidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy.setHorizontalStretch(1)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.edit_panel.sizePolicy().hasHeightForWidth())
+        self.edit_panel.setSizePolicy(sizePolicy)
         self.edit_panel.setMinimumSize(QtCore.QSize(400, 0))
+        self.edit_panel.setStyleSheet("* {\n"
+"    background-color: rgb(32, 33, 36);\n"
+"    color: #fff;\n"
+"}")
         self.edit_panel.setObjectName("edit_panel")
         self.main_layout.addWidget(self.edit_panel)
         self.verticalLayout_2.addLayout(self.main_layout)
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 834, 22))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
