@@ -43,7 +43,7 @@ def get_note_details(token: str, id: str):
         assert note.can_view(token)
     except Exception as e:
         return JSONResponse(
-            content={"error": "Can not find this note"},
+            content={"error": "Can not find note with id " + id},
             status_code=status.HTTP_404_NOT_FOUND,
         )
 
