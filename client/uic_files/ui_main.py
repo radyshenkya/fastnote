@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file './uic_files/main.ui'
+# Form implementation generated from reading ui file '/home/bluered/projects/python/notebin/client/uic_files/main.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.0
 #

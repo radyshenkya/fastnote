@@ -36,11 +36,38 @@
           <height>0</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">* {
 	background-color: rgb(32, 33, 36);
 	color: #fff;
 }</string>
+        </property>
+        <property name="plainText">
+         <string># Привет, Мир!
+
+Эта программа способна отображать файлы формата **.md** в режиме *реального времени*
+
+Тут есть поддержка:
+&gt; цитат
+&gt; &gt; вложенных цитат
+
+**различного** *рода* `форматирования`
+
+| таблиц | test       |
+| ---------    | ---------   |
+| 1             | test       |
+| 2             | test       | 
+
+## Заголовков
+
+...и **картиночек!**  
+
+![Test Image](https://media.discordapp.net/attachments/745573062279168050/1018484982555086868/index.gif)</string>
         </property>
        </widget>
       </item>

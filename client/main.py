@@ -34,6 +34,7 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
 
 def main():
     app = QApplication(sys.argv)
+    app.setStyle("Windows")
     ex = MainWindow()
     ex.show()
     sys.exit(app.exec())
