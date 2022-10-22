@@ -2,10 +2,11 @@ import sys
 
 from ui import main_ui
 from utils import get_rendered_markdown
-from PyQt6.QtWebEngineWidgets import QWebEngineView
 
-from PyQt6.QtWidgets import QMainWindow, QApplication
-from PyQt6.QtCore import QUrl
+from notes.LocalNote import LocalNote
+
+from PyQt5.QtWidgets import QMainWindow, QApplication
+from PyQt5.QtCore import QUrl
 
 
 class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
@@ -17,11 +18,7 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         self.init_logic()
 
     def init_ui(self):
-        # INITIALIZING WEB ENGINE WIDGET
-        self.render_panel = QWebEngineView(self)
         self.render_panel.setHtml("<h1>ASDASD</h1>")
-        self.render_panel.setMinimumSize(400, 400)
-        self.main_layout.addWidget(self.render_panel, stretch=1)
 
     def init_logic(self):
         self.edit_panel.textChanged.connect(self.update_render_panel)
@@ -31,10 +28,12 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         rendered_text = get_rendered_markdown(md_str)
         self.render_panel.setHtml(rendered_text)
 
+    # def open_file(self)
+
 
 def main():
     app = QApplication(sys.argv)
-    app.setStyle("Windows")
+    # app.setStyle("Windows")
     ex = MainWindow()
     ex.show()
     sys.exit(app.exec())

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>834</width>
+    <width>916</width>
     <height>758</height>
    </rect>
   </property>
@@ -16,12 +16,31 @@
   <property name="styleSheet">
    <string notr="true">* {
 	background-color: rgb(55, 57, 61);
+	color: #fff;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <layout class="QHBoxLayout" name="main_layout">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="save_btn">
+        <property name="text">
+         <string>Save</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="open_btn">
+        <property name="text">
+         <string>Open</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="main_layout" stretch="0,1">
       <item>
        <widget class="QPlainTextEdit" name="edit_panel">
         <property name="sizePolicy">
@@ -71,11 +90,21 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="TextBrowser" name="render_panel"/>
+      </item>
      </layout>
     </item>
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TextBrowser</class>
+   <extends>QTextBrowser</extends>
+   <header>widgets.TextBrowser</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
