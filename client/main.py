@@ -18,7 +18,7 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         self.init_logic()
 
     def init_ui(self):
-        self.render_panel.setHtml("<h1>ASDASD</h1>")
+        self.update_render_panel()
 
     def init_logic(self):
         self.edit_panel.textChanged.connect(self.update_render_panel)

@@ -1,49 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html>
 <head>
-    <style>
-        :root {
-            --bg-color: #202124;
-            --bg-footer-color: #37393D;
-
-            --primary-color: #D34F73;
-            --secondary-color: #06BA63;
-            --main-text: #FFF;
-            --secondary-text: #9A9FA6;
-        }
-
+<style type="text/css">
         body {
-            color: var(--main-text);
+            font-size: 20px;
+            color: #FFF;
             font-family: 'Ubuntu', sans-serif;
-            background-color: var(--bg-color);
         }
 
         a {
-            color: var(--secondary-text);
-            transition: color 0.5s;
-        }
-
-        a:hover {
-            color: var(--primary-color);
+            color: #D34F73;
         }
 
         hr {
-            border: 1px solid var(--bg-footer-color);
+            border: 5px solid #37393D;
+            color: #37393D;
+            height: 10px;
+            border-color: #37393D;
         }
 
         blockquote {
-            color: var(--secondary-text);
-            border-left: 4px solid var(--bg-footer-color);
+            color: #9A9FA6;
+            border-left: 5px solid #37393D;
             padding-left: 10px;
             margin-left: 10px;
         }
 
         img {
-            max-width: 700px;
-            border-radius: 5px;
+            max-width: 500px;
             margin-top: 30px;
             margin-bottom: 40px;
+        }
+
+        table>tbody>tr>td {
+            border: 2px solid #37393D;
+            padding: 5px;
         }
     </style>
 </head>
 <body>
 {{ content }}
 </body>
+</html>

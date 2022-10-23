@@ -16,8 +16,23 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(916, 758)
         MainWindow.setStyleSheet("* {\n"
-"    background-color: rgb(55, 57, 61);\n"
+"    background-color: #202124;\n"
 "    color: #fff;\n"
+"    border: 0px solid #fff;\n"
+"}\n"
+"\n"
+"QPushButton {\n"
+"    border: 2px solid rgb(211, 79, 115);\n"
+"    padding: 10px 17px;\n"
+"    color: #D34F73;\n"
+"    font-size: 20px;\n"
+"    font-family: \'Roboto\', sans-serif;\n"
+"    font-weight: 300;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    border-color: #FFF;\n"
+"    color: #FFF;\n"
 "}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -44,13 +59,11 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(16)
         self.edit_panel.setFont(font)
-        self.edit_panel.setStyleSheet("* {\n"
-"    background-color: rgb(32, 33, 36);\n"
-"    color: #fff;\n"
-"}")
+        self.edit_panel.setStyleSheet("")
         self.edit_panel.setObjectName("edit_panel")
         self.main_layout.addWidget(self.edit_panel)
         self.render_panel = TextBrowser(self.centralwidget)
+        self.render_panel.setStyleSheet("")
         self.render_panel.setObjectName("render_panel")
         self.main_layout.addWidget(self.render_panel)
         self.main_layout.setStretch(1, 1)
@@ -63,11 +76,11 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Fast Note"))
-        self.save_btn.setText(_translate("MainWindow", "Save"))
-        self.open_btn.setText(_translate("MainWindow", "Open"))
+        self.save_btn.setText(_translate("MainWindow", "SAVE"))
+        self.open_btn.setText(_translate("MainWindow", "OPEN"))
         self.edit_panel.setPlainText(_translate("MainWindow", "# Привет, Мир!\n"
 "\n"
-"Эта программа способна отображать файлы формата **.md** в режиме *реального времени*\n"
+"Эта программа способна отображать файлы формата **.md**\n"
 "\n"
 "Тут есть поддержка:\n"
 "> цитат\n"
@@ -84,5 +97,10 @@ class Ui_MainWindow(object):
 "\n"
 "...и **картиночек!**  \n"
 "\n"
-"![Test Image](https://media.discordapp.net/attachments/745573062279168050/1018484982555086868/index.gif)"))
+"![Test Image](https://media.discordapp.net/attachments/745573062279168050/1033651735450886154/unknown.png)"))
+        self.render_panel.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
 from widgets.TextBrowser import TextBrowser

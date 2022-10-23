@@ -4,7 +4,7 @@ from PyQt5.QtGui import QMovie, QPixmap
 
 import requests
 
-
+# QTextBrowser with custom resource loading and anchors opening
 class TextBrowser(QTextBrowser):
     def __init__(self, parent) -> None:
         super().__init__(parent)
@@ -17,6 +17,8 @@ class TextBrowser(QTextBrowser):
 
         try:
             if not url.url() in self.cached_links.keys():
+                if url.url()[-3:] == "gif":
+                    print("Gifs currently not supported")
                 pic_data = requests.get(url.url(), allow_redirects=True).content
                 pixmap = QPixmap()
                 pixmap.loadFromData(pic_data)
