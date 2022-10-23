@@ -7,7 +7,8 @@ from utils import alert_message_box, get_rendered_markdown
 
 from notes.LocalNote import LocalNote
 
-from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QMessageBox
+from PyQt5.QtGui import QKeySequence
+from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QShortcut, QAction
 
 
 class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
@@ -30,6 +31,10 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         self.save_btn.clicked.connect(self.save_file)
         self.open_btn.clicked.connect(self.open_file)
         self.edit_panel.textChanged.connect(self.update_render_panel)
+
+        # SHORT CUTS
+        self.short_cut_save = QShortcut(QKeySequence("Ctrl+S"), self)
+        self.short_cut_save.activated.connect(self.save_file)
 
     def update_render_panel(self):
         md_str = self.edit_panel.toPlainText()
@@ -70,6 +75,7 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
             alert_message_box("Ошибка!", "Файл не удалось сохранить.")
 
     def save_file(self):
+        print(self.note)
         if self.note is None:
             self.save_file_as()
             return
@@ -93,10 +99,13 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
             str(self.note) if not self.note is None else "unsaved file",
         )
 
+    def closeEvent(self, event) -> None:
+        self.save_file()
+        return super().closeEvent(event)
+
 
 def main():
     app = QApplication(sys.argv)
-    # app.setStyle("Windows")
     ex = MainWindow()
     ex.show()
     sys.exit(app.exec())

@@ -81,6 +81,9 @@ class Ui_MainWindow(object):
         self.open_btn = QtWidgets.QPushButton(self.centralwidget)
         self.open_btn.setObjectName("open_btn")
         self.horizontalLayout.addWidget(self.open_btn)
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setObjectName("pushButton")
+        self.horizontalLayout.addWidget(self.pushButton)
         self.verticalLayout_2.addLayout(self.horizontalLayout)
         self.current_file_label = QtWidgets.QLineEdit(self.centralwidget)
         self.current_file_label.setStyleSheet("* {\n"
@@ -124,6 +127,7 @@ class Ui_MainWindow(object):
         self.save_btn.setText(_translate("MainWindow", "SAVE"))
         self.save_as_btn.setText(_translate("MainWindow", "SAVE AS"))
         self.open_btn.setText(_translate("MainWindow", "OPEN"))
+        self.pushButton.setText(_translate("MainWindow", "OPEN REMOTE"))
         self.current_file_label.setText(_translate("MainWindow", "unsaved file"))
         self.edit_panel.setPlainText(_translate("MainWindow", "# Привет, Мир!\n"
 "\n"

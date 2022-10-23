@@ -91,6 +91,13 @@ QScrollBar:up-arrow:vertical, QScrollBar::down-arrow:vertical {
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>OPEN REMOTE</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item>
