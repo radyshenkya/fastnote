@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QTextBrowser
-from PyQt5.QtCore import QUrl, QByteArray, QBuffer, QIODevice
-from PyQt5.QtGui import QMovie, QPixmap
+from PyQt5.QtCore import QUrl
+from PyQt5.QtGui import QPixmap, QDesktopServices
 
 import requests
 
@@ -9,6 +9,8 @@ class TextBrowser(QTextBrowser):
     def __init__(self, parent) -> None:
         super().__init__(parent)
         self.cached_links = {}
+        self.setOpenLinks(False)
+        self.anchorClicked.connect(self.handle_links)
 
     def loadResource(self, type, name):
         url = name
@@ -28,3 +30,8 @@ class TextBrowser(QTextBrowser):
             return self.cached_links[url.url()]
         except:
             return QPixmap()
+
+    def handle_links(self, url):
+        if not url.scheme():
+            url = QUrl.fromLocalFile(url.url())
+        QDesktopServices.openUrl(url)
