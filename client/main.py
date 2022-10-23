@@ -46,6 +46,10 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
 
         self.update_current_path_label()
 
+        self.edit_panel.setVisible(
+            not self.note.readonly if not self.note is None else True
+        )
+
     def save_file_as(self):
         file_name = QFileDialog.getSaveFileName(
             self, "Сохранить как", "", "Markdown Format (*.md);;All Files (*)"
@@ -61,6 +65,13 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
     def save_file(self):
         if self.note is None:
             self.save_file_as()
+            return
+
+        if self.note.readonly:
+            alert_message_box(
+                "Ошибка!",
+                "Данная запись предназначена только для чтения. Если вы хотите ее редактировать, нажмите на кнопку SAVE AS.",
+            )
             return
         self.note.set_text(self.edit_panel.toPlainText())
         self.note.save()
