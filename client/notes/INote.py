@@ -18,3 +18,6 @@ class INote:
             raise IOError()
 
         self._save()
+
+    def __str__(self) -> str:
+        return "BaseNoteClass"

@@ -43,10 +43,19 @@ class Ui_MainWindow(object):
         self.save_btn = QtWidgets.QPushButton(self.centralwidget)
         self.save_btn.setObjectName("save_btn")
         self.horizontalLayout.addWidget(self.save_btn)
+        self.save_as_btn = QtWidgets.QPushButton(self.centralwidget)
+        self.save_as_btn.setObjectName("save_as_btn")
+        self.horizontalLayout.addWidget(self.save_as_btn)
         self.open_btn = QtWidgets.QPushButton(self.centralwidget)
         self.open_btn.setObjectName("open_btn")
         self.horizontalLayout.addWidget(self.open_btn)
         self.verticalLayout_2.addLayout(self.horizontalLayout)
+        self.current_file_label = QtWidgets.QLabel(self.centralwidget)
+        self.current_file_label.setStyleSheet("* {\n"
+"    color: #9A9FA6;\n"
+"}")
+        self.current_file_label.setObjectName("current_file_label")
+        self.verticalLayout_2.addWidget(self.current_file_label)
         self.main_layout = QtWidgets.QHBoxLayout()
         self.main_layout.setObjectName("main_layout")
         self.edit_panel = QtWidgets.QPlainTextEdit(self.centralwidget)
@@ -69,6 +78,9 @@ class Ui_MainWindow(object):
         self.main_layout.setStretch(1, 1)
         self.verticalLayout_2.addLayout(self.main_layout)
         MainWindow.setCentralWidget(self.centralwidget)
+        self.statusBar = QtWidgets.QStatusBar(MainWindow)
+        self.statusBar.setObjectName("statusBar")
+        MainWindow.setStatusBar(self.statusBar)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -77,7 +89,9 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Fast Note"))
         self.save_btn.setText(_translate("MainWindow", "SAVE"))
+        self.save_as_btn.setText(_translate("MainWindow", "SAVE AS"))
         self.open_btn.setText(_translate("MainWindow", "OPEN"))
+        self.current_file_label.setText(_translate("MainWindow", "unsaved"))
         self.edit_panel.setPlainText(_translate("MainWindow", "# Привет, Мир!\n"
 "\n"
 "Эта программа способна отображать файлы формата **.md**\n"

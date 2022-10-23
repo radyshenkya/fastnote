@@ -19,6 +19,9 @@ class LocalNote(INote):
         with open(self.file_path, "w") as f:
             f.write(self.text)
 
+    def __str__(self) -> str:
+        return self.file_path
+
     @staticmethod
     def load_file(file_path: str):
         if not is_file_exists(file_path):
