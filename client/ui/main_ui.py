@@ -31,8 +31,40 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "QPushButton:hover {\n"
-"    border-color: #FFF;\n"
-"    color: #FFF;\n"
+"    border-color: #06BA63;\n"
+"    color: #06BA63;\n"
+"}\n"
+"\n"
+"QScrollBar:vertical {\n"
+"    border: none;\n"
+"    width: 15px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    background:#D34F73;\n"
+"    width: 14px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical:hover {\n"
+"    background:#06BA63;\n"
+"    width: 14px;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical {\n"
+"height: 0px;\n"
+"}\n"
+"\n"
+"QScrollBar::sub-line:vertical {\n"
+"height: 0px;\n"
+"}\n"
+"\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
+"height: 0px;\n"
+"}\n"
+"\n"
+"\n"
+"QScrollBar:up-arrow:vertical, QScrollBar::down-arrow:vertical {\n"
+"          height: 0px;\n"
 "}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -50,10 +82,11 @@ class Ui_MainWindow(object):
         self.open_btn.setObjectName("open_btn")
         self.horizontalLayout.addWidget(self.open_btn)
         self.verticalLayout_2.addLayout(self.horizontalLayout)
-        self.current_file_label = QtWidgets.QLabel(self.centralwidget)
+        self.current_file_label = QtWidgets.QLineEdit(self.centralwidget)
         self.current_file_label.setStyleSheet("* {\n"
 "    color: #9A9FA6;\n"
 "}")
+        self.current_file_label.setReadOnly(True)
         self.current_file_label.setObjectName("current_file_label")
         self.verticalLayout_2.addWidget(self.current_file_label)
         self.main_layout = QtWidgets.QHBoxLayout()
@@ -91,7 +124,7 @@ class Ui_MainWindow(object):
         self.save_btn.setText(_translate("MainWindow", "SAVE"))
         self.save_as_btn.setText(_translate("MainWindow", "SAVE AS"))
         self.open_btn.setText(_translate("MainWindow", "OPEN"))
-        self.current_file_label.setText(_translate("MainWindow", "unsaved"))
+        self.current_file_label.setText(_translate("MainWindow", "unsaved file"))
         self.edit_panel.setPlainText(_translate("MainWindow", "# Привет, Мир!\n"
 "\n"
 "Эта программа способна отображать файлы формата **.md**\n"

@@ -30,8 +30,40 @@ QPushButton {
 }
 
 QPushButton:hover {
-	border-color: #FFF;
-	color: #FFF;
+	border-color: #06BA63;
+	color: #06BA63;
+}
+
+QScrollBar:vertical {
+	border: none;
+	width: 15px;
+}
+
+QScrollBar::handle:vertical {
+	background:#D34F73;
+	width: 14px;
+}
+
+QScrollBar::handle:vertical:hover {
+	background:#06BA63;
+	width: 14px;
+}
+
+QScrollBar::add-line:vertical {
+height: 0px;
+}
+
+QScrollBar::sub-line:vertical {
+height: 0px;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+height: 0px;
+}
+
+
+QScrollBar:up-arrow:vertical, QScrollBar::down-arrow:vertical {
+          height: 0px;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -62,14 +94,17 @@ QPushButton:hover {
      </layout>
     </item>
     <item>
-     <widget class="QLabel" name="current_file_label">
+     <widget class="QLineEdit" name="current_file_label">
       <property name="styleSheet">
        <string notr="true">* {
 	color: #9A9FA6;
 }</string>
       </property>
       <property name="text">
-       <string>unsaved</string>
+       <string>unsaved file</string>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
     </item>

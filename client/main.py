@@ -21,6 +21,7 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
 
     def init_logic(self):
         self.note = None
+        self.update_current_path_label()
 
         # EVENTS CONNECTION
         self.save_as_btn.clicked.connect(self.save_file_as)
@@ -35,10 +36,14 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
 
     def open_file(self):
         # Opening file
-        file_name = QFileDialog.getOpenFileName(
-            self, "Выбрать файл", "", "Markdown Format (*.md);;All Files (*)"
-        )[0]
-        self.note = LocalNote.get_or_create_file(file_name)
+        try:
+            file_name = QFileDialog.getOpenFileName(
+                self, "Выбрать файл", "", "Markdown Format (*.md);;All Files (*)"
+            )[0]
+            self.note = LocalNote.get_or_create_file(file_name)
+        except FileNotFoundError as e:
+            alert_message_box("Ошибка!", "Файл не удалось открыть.")
+            return
 
         # Updating editor
         self.edit_panel.setPlainText(self.note.text)
