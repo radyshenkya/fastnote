@@ -3,6 +3,8 @@ import os
 from jinja2 import Template
 from markdown import markdown
 
+from PyQt5.QtWidgets import QMessageBox
+
 from hashlib import md5
 
 _FILE_RENDER_TEMPLATE = Template(
@@ -17,5 +19,9 @@ def get_rendered_markdown(md: str) -> str:
     return _FILE_RENDER_TEMPLATE.render(content=content)
 
 
-def hash_value(val: str) -> str:
-    return md5(md5(val.encode("utf-8")).hexdigest().encode("utf-8")).hexdigest()
+def alert_message_box(title: str, message: str):
+    msg_box = QMessageBox()
+    msg_box.setText(message)
+    msg_box.setWindowTitle(title)
+    msg_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+    return msg_box.exec()

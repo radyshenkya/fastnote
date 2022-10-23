@@ -1,11 +1,11 @@
 import sys
 
 from ui import main_ui
-from utils import get_rendered_markdown
+from utils import alert_message_box, get_rendered_markdown
 
-from notes.LocalNote import LocalNote, is_file_exists
+from notes.LocalNote import LocalNote
 
-from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog
+from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QMessageBox
 
 
 class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
@@ -51,13 +51,17 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
             self, "Сохранить как", "", "Markdown Format (*.md);;All Files (*)"
         )[0]
 
-        self.note = LocalNote.get_or_create_file(file_name)
-        self.save_file()
+        try:
+            self.note = LocalNote.get_or_create_file(file_name)
+            self.save_file()
+        except FileNotFoundError as e:
+            self.note = None
+            alert_message_box("Ошибка!", "Файл не удалось сохранить.")
 
     def save_file(self):
         if self.note is None:
             self.save_file_as()
-
+            return
         self.note.set_text(self.edit_panel.toPlainText())
         self.note.save()
 
