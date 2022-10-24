@@ -1,4 +1,5 @@
 import os
+from random import choices
 
 from jinja2 import Template
 from markdown import markdown
@@ -25,3 +26,24 @@ def alert_message_box(title: str, message: str):
     msg_box.setWindowTitle(title)
     msg_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
     return msg_box.exec()
+
+
+def generate_user_token() -> str:
+    USER_TOKEN_ITERATIONS = 32
+    GENERATION_ALPHABET = "abcdefghijklmnopqrst1234567890"
+    return md5(
+        ("".join(choices(GENERATION_ALPHABET, k=USER_TOKEN_ITERATIONS))).encode("utf-8")
+    ).hexdigest()
+
+
+def try_function(fail_message="Error"):
+    def wrapper_with_args(func):
+        def wrapper(*args, **kwargs):
+            try:
+                return func(*args, **kwargs)
+            except IOError as e:
+                alert_message_box("Ошибка!", fail_message)
+
+        return wrapper
+
+    return wrapper_with_args

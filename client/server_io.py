@@ -11,7 +11,7 @@ def clear_address(address: str) -> str:
 def assert_status(original_status_code, needed_status_code):
     if original_status_code != needed_status_code:
         raise IOError(
-            "Statsu Code is "
+            "Status Code is "
             + str(original_status_code)
             + ". Need "
             + needed_status_code

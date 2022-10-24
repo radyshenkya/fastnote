@@ -64,42 +64,14 @@ height: 0px;
 
 QScrollBar:up-arrow:vertical, QScrollBar::down-arrow:vertical {
           height: 0px;
+}
+
+QMenuBar::item:selected {
+	background-color: #37393D;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QPushButton" name="save_btn">
-        <property name="text">
-         <string>SAVE</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="save_as_btn">
-        <property name="text">
-         <string>SAVE AS</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="open_btn">
-        <property name="text">
-         <string>OPEN</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>OPEN REMOTE</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
     <item>
      <widget class="QLineEdit" name="current_file_label">
       <property name="styleSheet">
@@ -114,6 +86,9 @@ QScrollBar:up-arrow:vertical, QScrollBar::down-arrow:vertical {
        <bool>true</bool>
       </property>
      </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="edit_tools_layout"/>
     </item>
     <item>
      <layout class="QHBoxLayout" name="main_layout" stretch="0,1">
@@ -142,24 +117,11 @@ QScrollBar:up-arrow:vertical, QScrollBar::down-arrow:vertical {
         <property name="plainText">
          <string># Привет, Мир!
 
-Эта программа способна отображать файлы формата **.md**
+Редактор **FastNote** позволяет редактировать и просматривать файлы формата [MarkDown](https://en.wikipedia.org/wiki/Markdown)
 
-Тут есть поддержка:
-&gt; цитат
-&gt; &gt; вложенных цитат
+---
 
-**различного** *рода* `форматирования`
-
-| таблиц | test       |
-| ---------    | ---------   |
-| 1             | test       |
-| 2             | test       | 
-
-## Заголовков
-
-...и **картиночек!**  
-
-![Test Image](https://media.discordapp.net/attachments/745573062279168050/1033651735450886154/unknown.png)</string>
+![Test Image](https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/240px-PNG_transparency_demonstration_1.png)</string>
         </property>
        </widget>
       </item>
@@ -182,6 +144,26 @@ p, li { white-space: pre-wrap; }
    </layout>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QMenuBar" name="menu_bar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>916</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <action name="actiontext">
+   <property name="text">
+    <string>text</string>
+   </property>
+  </action>
+  <action name="actiontext_2">
+   <property name="text">
+    <string>text</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>

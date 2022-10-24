@@ -65,26 +65,15 @@ class Ui_MainWindow(object):
 "\n"
 "QScrollBar:up-arrow:vertical, QScrollBar::down-arrow:vertical {\n"
 "          height: 0px;\n"
+"}\n"
+"\n"
+"QMenuBar::item:selected {\n"
+"    background-color: #37393D;\n"
 "}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.save_btn = QtWidgets.QPushButton(self.centralwidget)
-        self.save_btn.setObjectName("save_btn")
-        self.horizontalLayout.addWidget(self.save_btn)
-        self.save_as_btn = QtWidgets.QPushButton(self.centralwidget)
-        self.save_as_btn.setObjectName("save_as_btn")
-        self.horizontalLayout.addWidget(self.save_as_btn)
-        self.open_btn = QtWidgets.QPushButton(self.centralwidget)
-        self.open_btn.setObjectName("open_btn")
-        self.horizontalLayout.addWidget(self.open_btn)
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setObjectName("pushButton")
-        self.horizontalLayout.addWidget(self.pushButton)
-        self.verticalLayout_2.addLayout(self.horizontalLayout)
         self.current_file_label = QtWidgets.QLineEdit(self.centralwidget)
         self.current_file_label.setStyleSheet("* {\n"
 "    color: #9A9FA6;\n"
@@ -92,6 +81,9 @@ class Ui_MainWindow(object):
         self.current_file_label.setReadOnly(True)
         self.current_file_label.setObjectName("current_file_label")
         self.verticalLayout_2.addWidget(self.current_file_label)
+        self.edit_tools_layout = QtWidgets.QHBoxLayout()
+        self.edit_tools_layout.setObjectName("edit_tools_layout")
+        self.verticalLayout_2.addLayout(self.edit_tools_layout)
         self.main_layout = QtWidgets.QHBoxLayout()
         self.main_layout.setObjectName("main_layout")
         self.edit_panel = QtWidgets.QPlainTextEdit(self.centralwidget)
@@ -117,6 +109,14 @@ class Ui_MainWindow(object):
         self.statusBar = QtWidgets.QStatusBar(MainWindow)
         self.statusBar.setObjectName("statusBar")
         MainWindow.setStatusBar(self.statusBar)
+        self.menu_bar = QtWidgets.QMenuBar(MainWindow)
+        self.menu_bar.setGeometry(QtCore.QRect(0, 0, 916, 22))
+        self.menu_bar.setObjectName("menu_bar")
+        MainWindow.setMenuBar(self.menu_bar)
+        self.actiontext = QtWidgets.QAction(MainWindow)
+        self.actiontext.setObjectName("actiontext")
+        self.actiontext_2 = QtWidgets.QAction(MainWindow)
+        self.actiontext_2.setObjectName("actiontext_2")
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -124,34 +124,19 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Fast Note"))
-        self.save_btn.setText(_translate("MainWindow", "SAVE"))
-        self.save_as_btn.setText(_translate("MainWindow", "SAVE AS"))
-        self.open_btn.setText(_translate("MainWindow", "OPEN"))
-        self.pushButton.setText(_translate("MainWindow", "OPEN REMOTE"))
         self.current_file_label.setText(_translate("MainWindow", "unsaved file"))
         self.edit_panel.setPlainText(_translate("MainWindow", "# Привет, Мир!\n"
 "\n"
-"Эта программа способна отображать файлы формата **.md**\n"
+"Редактор **FastNote** позволяет редактировать и просматривать файлы формата [MarkDown](https://en.wikipedia.org/wiki/Markdown)\n"
 "\n"
-"Тут есть поддержка:\n"
-"> цитат\n"
-"> > вложенных цитат\n"
+"---\n"
 "\n"
-"**различного** *рода* `форматирования`\n"
-"\n"
-"| таблиц | test       |\n"
-"| ---------    | ---------   |\n"
-"| 1             | test       |\n"
-"| 2             | test       | \n"
-"\n"
-"## Заголовков\n"
-"\n"
-"...и **картиночек!**  \n"
-"\n"
-"![Test Image](https://media.discordapp.net/attachments/745573062279168050/1033651735450886154/unknown.png)"))
+"![Test Image](https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/240px-PNG_transparency_demonstration_1.png)"))
         self.render_panel.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.actiontext.setText(_translate("MainWindow", "text"))
+        self.actiontext_2.setText(_translate("MainWindow", "text"))
 from widgets.TextBrowser import TextBrowser
