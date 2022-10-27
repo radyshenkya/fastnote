@@ -56,6 +56,10 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         self.edit_panel.textChanged.connect(self.update_render_panel)
 
         # ACTIONS
+        # new
+        new_action = QAction("New", self)
+        new_action.setShortcut("Ctrl+n")
+        new_action.triggered.connect(self.new_file)
         # save
         save_action = QAction("Save", self)
         save_action.setShortcut("Ctrl+s")
@@ -72,6 +76,10 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         open_remote_action = QAction("Open Remote", self)
         open_remote_action.setShortcut("Ctrl+Shift+o")
         open_remote_action.triggered.connect(self.open_remote)
+        # save to server
+        save_to_server_action = QAction("Upload to server", self)
+        save_to_server_action.setShortcut("Ctrl+u")
+        save_to_server_action.triggered.connect(self.upload_to_server)
         # settings
         open_settings_action = QAction("Settings", self)
         open_settings_action.triggered.connect(self.open_settings_dialog)
@@ -80,8 +88,10 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         file_menu = QMenu("&File", self)
         file_menu.addActions(
             [
+                new_action,
                 save_action,
                 save_as_action,
+                save_to_server_action,
                 open_action,
                 open_remote_action,
                 open_settings_action,
@@ -93,10 +103,11 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         dial = SettingsDialog(self.settings_manager.settings_parsed, None, self)
         dial.show()
 
-    def update_render_panel(self):
-        md_str = self.edit_panel.toPlainText()
-        rendered_text = get_rendered_markdown(md_str)
-        self.render_panel.setHtml(rendered_text)
+    def new_file(self):
+        self.note = None
+        self.edit_panel.setPlainText("# Hello World")
+        self.update_current_path_label()
+        self.update_render_panel()
 
     @try_function(fail_message="Файл не удалось открыть")
     def open_file(self, *args):
@@ -107,8 +118,7 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         self.note = LocalNote.get_or_create_file(file_name)
 
         # Updating editor
-        self.update_edit_panel_from_note()
-        self.update_current_path_label()
+        self.update_ui()
 
     def save_file_as(self, *args):
         file_name = QFileDialog.getSaveFileName(
@@ -158,8 +168,28 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
             )
             self.note = RemoteNote.load_note_from_server(server_enpoint, user_token, id)
 
-            self.update_current_path_label()
-            self.update_edit_panel_from_note()
+            self.update_ui()
+
+    @try_function(fail_message="Проблемы с сервером")
+    def upload_to_server(self, *args):
+        server_enpoint = self.settings_manager.get_setting(
+            SettingsNamesEnum.SERVER_ENDPOINT_ADDRESS,
+            DEFAULT_SETTINGS[SettingsNamesEnum.SERVER_ENDPOINT_ADDRESS],
+        )
+
+        user_token = self.settings_manager.get_setting(
+            SettingsNamesEnum.USER_TOKEN,
+            DEFAULT_SETTINGS[SettingsNamesEnum.USER_TOKEN],
+        )
+        self.note = RemoteNote.new_note(server_enpoint, user_token)
+        self.note.set_text(self.edit_panel.toPlainText())
+        self.note.save()
+        self.update_ui()
+
+    def update_render_panel(self):
+        md_str = self.edit_panel.toPlainText()
+        rendered_text = get_rendered_markdown(md_str)
+        self.render_panel.setHtml(rendered_text)
 
     def update_current_path_label(self):
         self.current_file_label.setText(
@@ -171,6 +201,11 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
             not self.note.readonly if not self.note is None else True
         )
         self.edit_panel.setPlainText(self.note.text)
+        self.update_render_panel()
+
+    def update_ui(self):
+        self.update_current_path_label()
+        self.update_edit_panel_from_note()
         self.update_render_panel()
 
     def closeEvent(self, event) -> None:
