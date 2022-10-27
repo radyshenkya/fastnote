@@ -13,6 +13,14 @@ class SettingsDialog(QDialog, Ui_Dialog):
 
         self.changed_settings = {}
 
+        def on_ok_func_wrap(*args):
+            # Calling on_ok_function with chagned_settings as arg
+            for k, v in self.changed_settings.items():
+                self.changed_settings[k] = v.text()
+            on_ok_function(self.changed_settings)
+
+        self.buttonBox.accepted.connect(on_ok_func_wrap)
+
         for k, v in start_settings.items():
             self.changed_settings[k] = self.add_setting_input_field(k, v)
 

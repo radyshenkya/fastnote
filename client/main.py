@@ -105,7 +105,13 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         self.menu_bar.addMenu(file_menu)
 
     def open_settings_dialog(self):
-        dial = SettingsDialog(self.settings_manager.settings_parsed, None, self)
+        def update_settings(changed_settings):
+            self.settings_manager.settings_parsed = changed_settings
+            self.settings_manager.save()
+
+        dial = SettingsDialog(
+            self.settings_manager.settings_parsed, update_settings, self
+        )
         dial.show()
 
     def new_file(self):

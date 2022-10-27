@@ -3,7 +3,9 @@ import json
 
 
 def clear_address(address: str) -> str:
-    if address[-1] == "/":
+    if len(address) == 0:
+        pass
+    elif address[-1] == "/":
         return address[:-1]
     return address
 
