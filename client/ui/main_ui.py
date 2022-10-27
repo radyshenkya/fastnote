@@ -113,6 +113,10 @@ class Ui_MainWindow(object):
         self.menu_bar.setGeometry(QtCore.QRect(0, 0, 916, 22))
         self.menu_bar.setObjectName("menu_bar")
         MainWindow.setMenuBar(self.menu_bar)
+        self.toolBar = QtWidgets.QToolBar(MainWindow)
+        self.toolBar.setToolButtonStyle(QtCore.Qt.ToolButtonTextOnly)
+        self.toolBar.setObjectName("toolBar")
+        MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
         self.actiontext = QtWidgets.QAction(MainWindow)
         self.actiontext.setObjectName("actiontext")
         self.actiontext_2 = QtWidgets.QAction(MainWindow)
@@ -137,6 +141,7 @@ class Ui_MainWindow(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.toolBar.setWindowTitle(_translate("MainWindow", "Edit Tools"))
         self.actiontext.setText(_translate("MainWindow", "text"))
         self.actiontext_2.setText(_translate("MainWindow", "text"))
 from widgets.TextBrowser import TextBrowser

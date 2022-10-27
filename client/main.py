@@ -1,5 +1,6 @@
 #!/bin/python3
 
+from functools import partial
 import sys
 from widgets.SettingsDialog import SettingsDialog
 
@@ -18,6 +19,8 @@ from config import DEFAULT_SERVER, SETTINGS_FILE_PATH
 
 from settings_manager import SettingsManager, SettingsNamesEnum
 
+from text_edit_tools.Tools import *
+
 from PyQt5.QtWidgets import (
     QMainWindow,
     QApplication,
@@ -27,7 +30,7 @@ from PyQt5.QtWidgets import (
     QMenu,
 )
 
-
+TOOLS = [AddImageTool, BoldTool, ItalicTool]
 DEFAULT_SETTINGS = {
     SettingsNamesEnum.SERVER_ENDPOINT_ADDRESS: DEFAULT_SERVER,
     SettingsNamesEnum.USER_TOKEN: generate_user_token(),
@@ -41,6 +44,7 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         self.setupUi(self)
         self.init_ui()
         self.init_logic()
+        self.init_toolbar()
 
     def init_ui(self):
         self.update_render_panel()
@@ -103,6 +107,14 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
             ]
         )
         self.menu_bar.addMenu(file_menu)
+
+    def init_toolbar(self):
+        for tool in TOOLS:
+            new_action = QAction(tool.NAME, self)
+            if not tool.SHORTCUT is None:
+                new_action.setShortcut(tool.SHORTCUT)
+            new_action.triggered.connect(partial(tool.on_call, self.edit_panel))
+            self.toolBar.addAction(new_action)
 
     def open_settings_dialog(self):
         def update_settings(changed_settings):
