@@ -76,6 +76,10 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         open_remote_action = QAction("Open Remote", self)
         open_remote_action.setShortcut("Ctrl+Shift+o")
         open_remote_action.triggered.connect(self.open_remote)
+        # get notes from server
+        server_notes_list_action = QAction("List server notes", self)
+        server_notes_list_action.setShortcut("Ctrl+l")
+        server_notes_list_action.triggered.connect(self.get_user_notes)
         # save to server
         save_to_server_action = QAction("Upload to server", self)
         save_to_server_action.setShortcut("Ctrl+u")
@@ -92,6 +96,7 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
                 save_action,
                 save_as_action,
                 save_to_server_action,
+                server_notes_list_action,
                 open_action,
                 open_remote_action,
                 open_settings_action,
@@ -108,6 +113,30 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         self.edit_panel.setPlainText("# Hello World")
         self.update_current_path_label()
         self.update_render_panel()
+
+    @try_function(fail_message="Проблемы с сервером")
+    def get_user_notes(self, *args):
+        server_enpoint = self.settings_manager.get_setting(
+            SettingsNamesEnum.SERVER_ENDPOINT_ADDRESS,
+            DEFAULT_SETTINGS[SettingsNamesEnum.SERVER_ENDPOINT_ADDRESS],
+        )
+
+        user_token = self.settings_manager.get_setting(
+            SettingsNamesEnum.USER_TOKEN,
+            DEFAULT_SETTINGS[SettingsNamesEnum.USER_TOKEN],
+        )
+
+        notes = RemoteNote.fetch_notes_from_server(server_enpoint, user_token)
+
+        note_id, ok_pressed = QInputDialog.getItem(
+            self, "Выберите запись для открытия", "Запись:", notes, 1, False
+        )
+
+        if ok_pressed:
+            self.note = RemoteNote.load_note_from_server(
+                server_enpoint, user_token, note_id
+            )
+            self.update_ui()
 
     @try_function(fail_message="Файл не удалось открыть")
     def open_file(self, *args):

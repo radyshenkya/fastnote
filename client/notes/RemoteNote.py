@@ -47,3 +47,9 @@ class RemoteNote(INote):
             "",
             False,
         )
+
+    @staticmethod
+    def fetch_notes_from_server(server_point: str, user_token: str):
+        notes = get_user_note_ids(server_point, user_token)
+
+        return notes
