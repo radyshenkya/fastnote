@@ -68,6 +68,14 @@ QScrollBar:up-arrow:vertical, QScrollBar::down-arrow:vertical {
 
 QMenuBar::item:selected {
 	background-color: #37393D;
+}
+
+QToolButton {
+	
+}
+
+QToolButton:hover {
+	background-color: #37393D;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">

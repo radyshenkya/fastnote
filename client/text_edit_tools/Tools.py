@@ -54,3 +54,18 @@ class ItalicTool(BaseTool):
         cursor.insertText(new_text)
 
         cursor.endEditBlock()
+
+
+class HeaderTool(BaseTool):
+    NAME = "Header (Ctrl+h)"
+    SHORTCUT = "Ctrl+h"
+
+    @classmethod
+    def on_call(cls, text_edit: QPlainTextEdit):
+        cursor = text_edit.textCursor()
+        cursor.beginEditBlock()
+
+        cursor.movePosition(QTextCursor.MoveOperation.StartOfLine)
+        cursor.insertText("#")
+
+        cursor.endEditBlock()

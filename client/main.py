@@ -30,7 +30,7 @@ from PyQt5.QtWidgets import (
     QMenu,
 )
 
-TOOLS = [AddImageTool, BoldTool, ItalicTool]
+TOOLS = [AddImageTool, BoldTool, ItalicTool, HeaderTool]
 DEFAULT_SETTINGS = {
     SettingsNamesEnum.SERVER_ENDPOINT_ADDRESS: DEFAULT_SERVER,
     SettingsNamesEnum.USER_TOKEN: generate_user_token(),

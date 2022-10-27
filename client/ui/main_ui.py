@@ -69,6 +69,14 @@ class Ui_MainWindow(object):
 "\n"
 "QMenuBar::item:selected {\n"
 "    background-color: #37393D;\n"
+"}\n"
+"\n"
+"QToolButton {\n"
+"    \n"
+"}\n"
+"\n"
+"QToolButton:hover {\n"
+"    background-color: #37393D;\n"
 "}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
