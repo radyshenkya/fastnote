@@ -1,6 +1,10 @@
 from pathlib import Path
 import json
 
+from requests import JSONDecodeError
+
+from utils import debug
+
 
 class SettingsNamesEnum:
     SERVER_ENDPOINT_ADDRESS = "server_endpoint"
@@ -14,7 +18,14 @@ class SettingsManager:
             open(file_path, "w").write(json.dumps(default_settings))
 
         self.file_path = file_path
-        self.settings_parsed = json.loads(open(file_path, "r").read())
+
+        try:
+            self.settings_parsed = json.loads(open(file_path, "r").read())
+        except json.decoder.JSONDecodeError as e:
+            debug("Settings file is corrupted, rewriting it for defaults.")
+
+            self.settings_parsed = default_settings
+            self.save()
 
     def get_setting(self, setting_name, default_value):
         try:

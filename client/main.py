@@ -1,6 +1,7 @@
 #!/bin/python3
 
 import sys
+from widgets.SettingsDialog import SettingsDialog
 
 from ui import main_ui
 from utils import (
@@ -13,22 +14,20 @@ from utils import (
 from notes.LocalNote import LocalNote
 from notes.RemoteNote import RemoteNote
 
+from config import DEFAULT_SERVER, SETTINGS_FILE_PATH
+
 from settings_manager import SettingsManager, SettingsNamesEnum
 
-from PyQt5.QtGui import QKeySequence
 from PyQt5.QtWidgets import (
     QMainWindow,
     QApplication,
     QFileDialog,
     QInputDialog,
-    QShortcut,
     QAction,
     QMenu,
 )
 
 
-SETTINGS_FILE_PATH = "settings.json"
-DEFAULT_SERVER = "https://cef5-46-181-148-140.eu.ngrok.io"
 DEFAULT_SETTINGS = {
     SettingsNamesEnum.SERVER_ENDPOINT_ADDRESS: DEFAULT_SERVER,
     SettingsNamesEnum.USER_TOKEN: generate_user_token(),
@@ -73,13 +72,26 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         open_remote_action = QAction("Open Remote", self)
         open_remote_action.setShortcut("Ctrl+Shift+o")
         open_remote_action.triggered.connect(self.open_remote)
+        # settings
+        open_settings_action = QAction("Settings", self)
+        open_settings_action.triggered.connect(self.open_settings_dialog)
 
         # MENU BAR
         file_menu = QMenu("&File", self)
         file_menu.addActions(
-            [save_action, save_as_action, open_action, open_remote_action]
+            [
+                save_action,
+                save_as_action,
+                open_action,
+                open_remote_action,
+                open_settings_action,
+            ]
         )
         self.menu_bar.addMenu(file_menu)
+
+    def open_settings_dialog(self):
+        dial = SettingsDialog(self.settings_manager.settings_parsed, None, self)
+        dial.show()
 
     def update_render_panel(self):
         md_str = self.edit_panel.toPlainText()

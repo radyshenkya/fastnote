@@ -2,11 +2,12 @@ import os
 from random import choices
 
 from jinja2 import Template
+from PyQt5.QtWidgets import QMessageBox
+from hashlib import md5
+
 from markdown import markdown
 
-from PyQt5.QtWidgets import QMessageBox
-
-from hashlib import md5
+from config import DEBUG_MESSAGES
 
 _FILE_RENDER_TEMPLATE = Template(
     open(
@@ -20,11 +21,16 @@ def get_rendered_markdown(md: str) -> str:
     return _FILE_RENDER_TEMPLATE.render(content=content)
 
 
+def debug(*args, **kwargs):
+    if DEBUG_MESSAGES:
+        print("[DEBUG]", *args, **kwargs)
+
+
 def alert_message_box(title: str, message: str):
     msg_box = QMessageBox()
     msg_box.setText(message)
     msg_box.setWindowTitle(title)
-    msg_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+    msg_box.setStandardButtons(QMessageBox.Ok)
     return msg_box.exec()
 
 

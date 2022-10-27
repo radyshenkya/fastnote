@@ -14,7 +14,7 @@ def assert_status(original_status_code, needed_status_code):
             "Status Code is "
             + str(original_status_code)
             + ". Need "
-            + needed_status_code
+            + str(needed_status_code)
         )
 
 
