@@ -7,7 +7,7 @@ class BaseTool:
     SHORTCUT = None
 
     @classmethod
-    def on_call(cls, text_edit: QPlainTextEdit):
+    def on_call(cls, text_edit: QPlainTextEdit, parent=None):
         raise NotImplementedError()
         # cursor = text_edit.textCursor()
         # cursor.beginEditBlock()

@@ -30,7 +30,7 @@ from PyQt5.QtWidgets import (
     QMenu,
 )
 
-TOOLS = [AddImageTool, BoldTool, ItalicTool, HeaderTool]
+TOOLS = [AddImageTool, TableTool, BoldTool, ItalicTool, HeaderTool]
 DEFAULT_SETTINGS = {
     SettingsNamesEnum.SERVER_ENDPOINT_ADDRESS: DEFAULT_SERVER,
     SettingsNamesEnum.USER_TOKEN: generate_user_token(),
@@ -113,7 +113,7 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
             new_action = QAction(tool.NAME, self)
             if not tool.SHORTCUT is None:
                 new_action.setShortcut(tool.SHORTCUT)
-            new_action.triggered.connect(partial(tool.on_call, self.edit_panel))
+            new_action.triggered.connect(partial(tool.on_call, self.edit_panel, self))
             self.toolBar.addAction(new_action)
 
     def open_settings_dialog(self):

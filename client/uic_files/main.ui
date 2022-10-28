@@ -20,6 +20,10 @@
 	border: 0px solid #fff;
 }
 
+QDialogButtonBox {
+	dialogbuttonbox-buttons-have-icons: false;
+}
+
 QPushButton {
 	border: 2px solid rgb(211, 79, 115);
 	padding: 10px 17px;
