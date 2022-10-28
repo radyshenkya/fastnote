@@ -61,39 +61,39 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
 
         # ACTIONS
         # new
-        new_action = QAction("New", self)
+        new_action = QAction("Новый документ", self)
         new_action.setShortcut("Ctrl+n")
         new_action.triggered.connect(self.new_file)
         # save
-        save_action = QAction("Save", self)
+        save_action = QAction("Сохранить", self)
         save_action.setShortcut("Ctrl+s")
         save_action.triggered.connect(self.save_file)
         # save as
-        save_as_action = QAction("Save As", self)
+        save_as_action = QAction("Сохранить как", self)
         save_as_action.setShortcut("Ctrl+Shift+s")
         save_as_action.triggered.connect(self.save_file_as)
         # open
-        open_action = QAction("Open", self)
+        open_action = QAction("Открыть", self)
         open_action.setShortcut("Ctrl+o")
         open_action.triggered.connect(self.open_file)
         # open remote
-        open_remote_action = QAction("Open Remote", self)
+        open_remote_action = QAction("Открыть с сервера", self)
         open_remote_action.setShortcut("Ctrl+Shift+o")
         open_remote_action.triggered.connect(self.open_remote)
         # get notes from server
-        server_notes_list_action = QAction("List server notes", self)
+        server_notes_list_action = QAction("Список записей с сервера", self)
         server_notes_list_action.setShortcut("Ctrl+l")
         server_notes_list_action.triggered.connect(self.get_user_notes)
         # save to server
-        save_to_server_action = QAction("Upload to server", self)
+        save_to_server_action = QAction("Загрузить на сервер", self)
         save_to_server_action.setShortcut("Ctrl+u")
         save_to_server_action.triggered.connect(self.upload_to_server)
         # settings
-        open_settings_action = QAction("Settings", self)
+        open_settings_action = QAction("Настройки", self)
         open_settings_action.triggered.connect(self.open_settings_dialog)
 
         # MENU BAR
-        file_menu = QMenu("&File", self)
+        file_menu = QMenu("&Файл", self)
         file_menu.addActions(
             [
                 new_action,

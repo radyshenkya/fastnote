@@ -24,6 +24,7 @@ QDialogButtonBox {
 	dialogbuttonbox-buttons-have-icons: false;
 }
 
+/* Buttons */
 QPushButton {
 	border: 2px solid rgb(211, 79, 115);
 	padding: 10px 17px;
@@ -38,7 +39,41 @@ QPushButton:hover {
 	color: #06BA63;
 }
 
-QScrollBar:vertical {
+/* Scroll bar horizontal */
+QScrollBar:horizontal {
+	border: none;
+	height: 15px;
+}
+
+QScrollBar::handle:horizontal {
+	background:#D34F73;
+	height: 14px;
+}
+
+QScrollBar::handle:horizontal:hover {
+	background:#06BA63;
+	height: 14px;
+}
+
+QScrollBar::add-line:horizontal {
+width: 0px;
+}
+
+QScrollBar::sub-line:horizontal {
+width: 0px;
+}
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+width: 0px;
+}
+
+
+QScrollBar:left-arrow:horizontal, QScrollBar::right-arrow:horizontal {
+          width: 0px;
+}
+
+/* Scroll bar vertical */
+QScrollBar:vertical{
 	border: none;
 	width: 15px;
 }
@@ -47,6 +82,7 @@ QScrollBar::handle:vertical {
 	background:#D34F73;
 	width: 14px;
 }
+
 
 QScrollBar::handle:vertical:hover {
 	background:#06BA63;
@@ -70,14 +106,12 @@ QScrollBar:up-arrow:vertical, QScrollBar::down-arrow:vertical {
           height: 0px;
 }
 
+/* Menu bar */
 QMenuBar::item:selected {
 	background-color: #37393D;
 }
 
-QToolButton {
-	
-}
-
+/* Tool bar */
 QToolButton:hover {
 	background-color: #37393D;
 }</string>

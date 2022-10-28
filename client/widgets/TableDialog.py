@@ -22,7 +22,9 @@ class TableDialog(QDialog, Ui_Dialog):
         for row in range(self.table.rowCount()):
             table.append(
                 [
-                    (lambda x: "" if x is None else x.text())(self.table.item(row, col))
+                    (lambda x: "-" if x is None else x.text())(
+                        self.table.item(row, col)
+                    )
                     for col in range(self.table.columnCount())
                 ]
             )

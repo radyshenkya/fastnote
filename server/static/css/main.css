@@ -204,6 +204,11 @@ body {
     border: 1px solid var(--bg-footer-color);
 }
 
+.profile-info-markdown>table>thead>tr>th {
+    border: 2px solid #37393D;
+    padding: 5px;
+}
+
 .profile-info-markdown>table>tbody>tr>td {
     border: 2px solid var(--bg-footer-color);
     padding: 5px;
