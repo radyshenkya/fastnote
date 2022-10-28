@@ -160,6 +160,7 @@ class Ui_MainWindow(object):
         self.menu_bar.setObjectName("menu_bar")
         MainWindow.setMenuBar(self.menu_bar)
         self.toolBar = QtWidgets.QToolBar(MainWindow)
+        self.toolBar.setMinimumSize(QtCore.QSize(0, 30))
         self.toolBar.setToolButtonStyle(QtCore.Qt.ToolButtonTextOnly)
         self.toolBar.setObjectName("toolBar")
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)

@@ -201,6 +201,12 @@ p, li { white-space: pre-wrap; }
    </property>
   </widget>
   <widget class="QToolBar" name="toolBar">
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>30</height>
+    </size>
+   </property>
    <property name="windowTitle">
     <string>Edit Tools</string>
    </property>
