@@ -1,4 +1,5 @@
 # Fast Note
+![fast note pic](https://media.discordapp.net/attachments/745573062279168050/1035584015316566177/unknown.png?width=535&height=468)
 ---
 **Fast Note** - редактор и просмоторщик заметок формата ***MarkDown***.
 
