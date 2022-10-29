@@ -1,4 +1,4 @@
-from sqlite3 import Cursor
+from utils import table_to_markdown
 from text_edit_tools.BaseTool import BaseTool
 from PyQt5.QtWidgets import QPlainTextEdit, QInputDialog
 from PyQt5.QtGui import QTextCursor
@@ -93,14 +93,7 @@ class TableTool(BaseTool):
 
             cursor.movePosition(QTextCursor.MoveOperation.StartOfLine)
 
-            text_to_insert = (
-                "|".join(table[0])
-                + "  \n"
-                + "|".join(["---" for el in table[0]])
-                + "\n"
-            )
-            for row in table[1:]:
-                text_to_insert += "|".join(row) + "\n"
+            text_to_insert = table_to_markdown(table)
 
             cursor.insertText(text_to_insert)
 

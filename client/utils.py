@@ -1,5 +1,6 @@
 import os
 from random import choices
+from typing import List
 
 from jinja2 import Template
 from PyQt5.QtWidgets import QMessageBox
@@ -19,6 +20,12 @@ _FILE_RENDER_TEMPLATE = Template(
 def get_rendered_markdown(md: str) -> str:
     content = markdown(md, extensions=["tables"])
     return _FILE_RENDER_TEMPLATE.render(content=content)
+
+
+def list_files_in_dir(path: str) -> str:
+    return list(
+        filter(lambda item: os.path.isfile(os.path.join(path, item)), os.listdir(path))
+    )
 
 
 def debug(*args, **kwargs):
@@ -53,3 +60,11 @@ def try_function(fail_message="Error"):
         return wrapper
 
     return wrapper_with_args
+
+
+def table_to_markdown(table: List[List[str]]):
+    text = "|".join(table[0]) + "  \n" + "|".join(["-" for el in table[0]]) + "\n"
+    for row in table[1:]:
+        text += "|".join(row) + "\n"
+
+    return text

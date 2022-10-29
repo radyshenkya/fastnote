@@ -1,21 +1,25 @@
 #!/bin/python3
 
 from functools import partial
+from importlib import util
+from os import path
 import sys
 from widgets.SettingsDialog import SettingsDialog
 
 from ui import main_ui
 from utils import (
     alert_message_box,
+    debug,
     get_rendered_markdown,
     generate_user_token,
+    list_files_in_dir,
     try_function,
 )
 
 from notes.LocalNote import LocalNote
 from notes.RemoteNote import RemoteNote
 
-from config import DEFAULT_SERVER, SETTINGS_FILE_PATH
+from config import DEFAULT_SERVER, SETTINGS_FILE_PATH, PLUGINS_DIR_PATH
 
 from settings_manager import SettingsManager, SettingsNamesEnum
 
@@ -45,6 +49,7 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         self.init_ui()
         self.init_logic()
         self.init_toolbar()
+        self.init_plugins()
 
     def init_ui(self):
         self.update_render_panel()
@@ -115,6 +120,39 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
                 new_action.setShortcut(tool.SHORTCUT)
             new_action.triggered.connect(partial(tool.on_call, self.edit_panel, self))
             self.toolBar.addAction(new_action)
+
+    def init_plugins(self):
+        # Listing all plugins in plugins/installed as modules
+        plugin_files = list_files_in_dir(PLUGINS_DIR_PATH)
+        plugins = []
+
+        for file in plugin_files:
+            try:
+                module_path = path.join(PLUGINS_DIR_PATH, file)
+                module_name = file.split(".")[0]
+
+                spec = util.spec_from_file_location(module_name, module_path)
+                module = util.module_from_spec(spec)
+                spec.loader.exec_module(module)
+                print(module.Plugin.NAME)
+                plugins.append(module.Plugin)
+            except Exception as e:
+                debug("Failed to load plugin", file)
+                debug(e)
+
+        # Creating plugin list
+        plugin_menu = QMenu("&Плагины", self)
+
+        for plugin in plugins:
+            plugin.on_init(self)
+            plugin_action = QAction(plugin.NAME, self)
+            if not plugin.SHORTCUT is None:
+                plugin_action.setShortcut(plugin.SHORTCUT)
+            plugin_action.triggered.connect(
+                partial(plugin.on_call, self.edit_panel, self)
+            )
+            plugin_menu.addAction(plugin_action)
+        self.menu_bar.addMenu(plugin_menu)
 
     def open_settings_dialog(self):
         def update_settings(changed_settings):
