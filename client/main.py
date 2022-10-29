@@ -134,7 +134,6 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
                 spec = util.spec_from_file_location(module_name, module_path)
                 module = util.module_from_spec(spec)
                 spec.loader.exec_module(module)
-                print(module.Plugin.NAME)
                 plugins.append(module.Plugin)
             except Exception as e:
                 debug("Failed to load plugin", file)
