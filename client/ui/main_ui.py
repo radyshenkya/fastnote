@@ -146,7 +146,10 @@ class Ui_MainWindow(object):
         self.edit_panel.setObjectName("edit_panel")
         self.main_layout.addWidget(self.edit_panel)
         self.render_panel = TextBrowser(self.centralwidget)
-        self.render_panel.setStyleSheet("")
+        self.render_panel.setStyleSheet("* {\n"
+"    border-left: 5px solid #37393D;\n"
+"    padding-left: 5px;\n"
+"}")
         self.render_panel.setObjectName("render_panel")
         self.main_layout.addWidget(self.render_panel)
         self.main_layout.setStretch(1, 1)
@@ -156,11 +159,11 @@ class Ui_MainWindow(object):
         self.statusBar.setObjectName("statusBar")
         MainWindow.setStatusBar(self.statusBar)
         self.menu_bar = QtWidgets.QMenuBar(MainWindow)
-        self.menu_bar.setGeometry(QtCore.QRect(0, 0, 916, 22))
+        self.menu_bar.setGeometry(QtCore.QRect(0, 0, 916, 26))
         self.menu_bar.setObjectName("menu_bar")
         MainWindow.setMenuBar(self.menu_bar)
         self.toolBar = QtWidgets.QToolBar(MainWindow)
-        self.toolBar.setMinimumSize(QtCore.QSize(0, 30))
+        self.toolBar.setMinimumSize(QtCore.QSize(0, 0))
         self.toolBar.setToolButtonStyle(QtCore.Qt.ToolButtonTextOnly)
         self.toolBar.setObjectName("toolBar")
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
@@ -186,8 +189,8 @@ class Ui_MainWindow(object):
         self.render_panel.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Ubuntu\'; font-size:11pt;\"><br /></p></body></html>"))
         self.toolBar.setWindowTitle(_translate("MainWindow", "Edit Tools"))
         self.actiontext.setText(_translate("MainWindow", "text"))
         self.actiontext_2.setText(_translate("MainWindow", "text"))
