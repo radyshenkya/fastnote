@@ -12,7 +12,8 @@ from config import DEBUG_MESSAGES
 
 _FILE_RENDER_TEMPLATE = Template(
     open(
-        os.path.dirname(os.path.realpath(__file__)) + "/templates/file_render.html"
+        os.path.dirname(os.path.realpath(__file__)) +
+        "/templates/file_render.html"
     ).read()
 )
 
@@ -24,7 +25,8 @@ def get_rendered_markdown(md: str) -> str:
 
 def list_files_in_dir(path: str) -> str:
     return list(
-        filter(lambda item: os.path.isfile(os.path.join(path, item)), os.listdir(path))
+        filter(lambda item: os.path.isfile(
+            os.path.join(path, item)), os.listdir(path))
     )
 
 
@@ -63,7 +65,8 @@ def try_function(fail_message="Error"):
 
 
 def table_to_markdown(table: List[List[str]]):
-    text = "|".join(table[0]) + "  \n" + "|".join(["-" for el in table[0]]) + "\n"
+    text = "|".join(table[0]) + "  \n" + \
+        "|".join(["-" for el in table[0]]) + "\n"
     for row in table[1:]:
         text += "|".join(row) + "\n"
 
