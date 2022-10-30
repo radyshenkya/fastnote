@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QTextBrowser
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QPixmap, QDesktopServices
-from utils import debug
+from utils import compare_lists, debug
 
 from threads.MarkdownTranslator import MarkdownTranslatorThread
 
@@ -16,7 +16,6 @@ class TextBrowser(QTextBrowser):
         self.markdown_thread = MarkdownTranslatorThread(self)
         self.markdown_thread.finish_signal.connect(
             self._text_translation_finished)
-
         self.cached_links = {}
         self.setOpenLinks(False)
         self.anchorClicked.connect(self.handle_links)

@@ -56,7 +56,8 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
 
     def init_logic(self):
         # Initing settings file
-        self.settings_manager = SettingsManager(SETTINGS_FILE_PATH, DEFAULT_SETTINGS)
+        self.settings_manager = SettingsManager(
+            SETTINGS_FILE_PATH, DEFAULT_SETTINGS)
 
         self.note = None
         self.update_current_path_label()
@@ -118,7 +119,8 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
             new_action = QAction(tool.NAME, self)
             if not tool.SHORTCUT is None:
                 new_action.setShortcut(tool.SHORTCUT)
-            new_action.triggered.connect(partial(tool.on_call, self.edit_panel, self))
+            new_action.triggered.connect(
+                partial(tool.on_call, self.edit_panel, self))
             self.toolBar.addAction(new_action)
 
     def init_plugins(self):
@@ -238,7 +240,8 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
 
     @try_function(fail_message="Либо данной записи нет, либо сервер не отвечает.")
     def open_remote(self, *args):
-        id, ok_pressed = QInputDialog.getText(self, "Введите ID записи.", "ID:")
+        id, ok_pressed = QInputDialog.getText(
+            self, "Введите ID записи.", "ID:")
 
         if ok_pressed:
             server_enpoint = self.settings_manager.get_setting(
@@ -250,7 +253,8 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
                 SettingsNamesEnum.USER_TOKEN,
                 DEFAULT_SETTINGS[SettingsNamesEnum.USER_TOKEN],
             )
-            self.note = RemoteNote.load_note_from_server(server_enpoint, user_token, id)
+            self.note = RemoteNote.load_note_from_server(
+                server_enpoint, user_token, id)
 
             self.update_ui()
 
@@ -272,8 +276,7 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
 
     def update_render_panel(self):
         md_str = self.edit_panel.toPlainText()
-        rendered_text = get_rendered_markdown(md_str)
-        self.render_panel.setHtml(rendered_text)
+        self.render_panel.setTextInMarkdown(md_str)
 
     def update_current_path_label(self):
         self.current_file_label.setText(

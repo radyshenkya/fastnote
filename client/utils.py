@@ -1,6 +1,6 @@
 import os
 from random import choices
-from typing import List
+from typing import Any, List, Tuple
 
 from jinja2 import Template
 from PyQt5.QtWidgets import QMessageBox
@@ -65,9 +65,34 @@ def try_function(fail_message="Error"):
 
 
 def table_to_markdown(table: List[List[str]]):
-    text = "|".join(table[0]) + "  \n" + \
-        "|".join(["-" for el in table[0]]) + "\n"
+    text = "|".join(table[0]) + "\n" + \
+        "|".join(["---" for el in table[0]]) + "\n"
     for row in table[1:]:
         text += "|".join(row) + "\n"
 
     return text
+
+
+def compare_lists(original_list: list, new_list: list) -> Tuple[List[Tuple[int, Any]], list, int]:
+    """Comparing lists by elements
+
+    Returning tuple.
+    First element in tuple - list[(index, to_replace)] - list with elements to replace, where index - index of element to replace, to_replace - new value
+    Second el - List[to_append] - elements needed to append
+    Third - index - from which index need to delete"""
+
+    # Checking replaces
+    to_replace = []
+    for i in range(min(len(original_list), len(new_list))):
+        if original_list[i] != new_list[i]:
+            to_replace.append((i, new_list[i]))
+
+    to_delete = -1
+    to_append = []
+
+    if len(original_list) > len(new_list):
+        to_delete = len(new_list)
+    elif len(original_list) < len(new_list):
+        to_append = [el for el in new_list[len(original_list):]]
+
+    return (to_replace, to_append, to_delete)
