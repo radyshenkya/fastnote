@@ -1,13 +1,22 @@
 from PyQt5.QtWidgets import QTextBrowser
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QPixmap, QDesktopServices
+from utils import debug
+
+from threads.MarkdownTranslator import MarkdownTranslatorThread
 
 import requests
 
-# QTextBrowser with custom resource loading and anchors opening
+# QTextBrowser with custom resource loading, setText method and anchors opening
+
+
 class TextBrowser(QTextBrowser):
     def __init__(self, parent) -> None:
         super().__init__(parent)
+        self.markdown_thread = MarkdownTranslatorThread(self)
+        self.markdown_thread.finish_signal.connect(
+            self._text_translation_finished)
+
         self.cached_links = {}
         self.setOpenLinks(False)
         self.anchorClicked.connect(self.handle_links)
@@ -20,8 +29,9 @@ class TextBrowser(QTextBrowser):
         try:
             if not url.url() in self.cached_links.keys():
                 if url.url()[-3:] == "gif":
-                    print("Gifs currently not supported")
-                pic_data = requests.get(url.url(), allow_redirects=True).content
+                    debug("Gifs currently not supported")
+                pic_data = requests.get(
+                    url.url(), allow_redirects=True).content
                 pixmap = QPixmap()
                 pixmap.loadFromData(pic_data)
                 self.cached_links[url.url()] = pixmap
@@ -35,3 +45,10 @@ class TextBrowser(QTextBrowser):
         if not url.scheme():
             url = QUrl.fromLocalFile(url.url())
         QDesktopServices.openUrl(url)
+
+    def setTextInMarkdown(self, text: str):
+        self.markdown_thread.markdown_text = text
+        self.markdown_thread.start()
+
+    def _text_translation_finished(self, translated_text: str):
+        self.setText(translated_text)
