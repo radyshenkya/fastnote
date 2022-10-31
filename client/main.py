@@ -4,6 +4,7 @@ from functools import partial
 from importlib import util
 from os import path
 import sys
+from plugins.PluginsManager import PluginManager
 from widgets.SettingsDialog import SettingsDialog
 
 from ui import main_ui
@@ -124,28 +125,14 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
             self.toolBar.addAction(new_action)
 
     def init_plugins(self):
-        # Listing all plugins in plugins/installed as modules
-        plugin_files = list_files_in_dir(PLUGINS_DIR_PATH)
-        plugins = []
-
-        for file in plugin_files:
-            try:
-                module_path = path.join(PLUGINS_DIR_PATH, file)
-                module_name = file.split(".")[0]
-
-                spec = util.spec_from_file_location(module_name, module_path)
-                module = util.module_from_spec(spec)
-                spec.loader.exec_module(module)
-                plugins.append(module.Plugin)
-            except Exception as e:
-                debug("Failed to load plugin", file)
-                debug(e)
+        # Loading plugin manager
+        self.plugin_manager = PluginManager.load_from_folder(PLUGINS_DIR_PATH)
+        self.plugin_manager.init_plugins(self)
 
         # Creating plugin list
         plugin_menu = QMenu("&Плагины", self)
 
-        for plugin in plugins:
-            plugin.on_init(self)
+        for plugin in self.plugin_manager.plugins:
             plugin_action = QAction(plugin.NAME, self)
             if not plugin.SHORTCUT is None:
                 plugin_action.setShortcut(plugin.SHORTCUT)
