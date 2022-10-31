@@ -6,6 +6,8 @@ from PyQt5.QtGui import QTextCursor
 from widgets.TableDialog import TableDialog
 
 # Add image template at cursor position
+
+
 class AddImageTool(BaseTool):
     NAME = "Добавить картинку (Ctrl+Shift+i)"
     SHORTCUT = "Ctrl+Shift+i"
@@ -41,9 +43,10 @@ class SelectedTextStyleTool(BaseTool):
         # if selection starts and stops with desired symbold, remove this symbols
         if (
             selection[: len(cls.APPEND_SYMBOLS)] == cls.APPEND_SYMBOLS
-            and selection[-(len(cls.APPEND_SYMBOLS)) :] == cls.APPEND_SYMBOLS
+            and selection[-(len(cls.APPEND_SYMBOLS)):] == cls.APPEND_SYMBOLS
         ):
-            new_text = selection[len(cls.APPEND_SYMBOLS) : -(len(cls.APPEND_SYMBOLS))]
+            new_text = selection[len(cls.APPEND_SYMBOLS)
+                                     : -(len(cls.APPEND_SYMBOLS))]
         else:  # else append this symbold
             new_text = f"{cls.APPEND_SYMBOLS}{cursor.selection().toPlainText()}{cls.APPEND_SYMBOLS}"
 
@@ -75,7 +78,28 @@ class HeaderTool(BaseTool):
         cursor.beginEditBlock()
 
         cursor.movePosition(QTextCursor.MoveOperation.StartOfLine)
-        cursor.insertText("#")
+        cursor.select(cursor.SelectionType.LineUnderCursor)
+
+        if not cursor.selection().toPlainText().startswith("######"):
+            cursor.insertText("#" + cursor.selection().toPlainText())
+
+        cursor.endEditBlock()
+
+
+class DeleteHeaderTool(BaseTool):
+    NAME = "Убрать заголовок (Ctrl+Shift+h)"
+    SHORTCUT = "Ctrl+Shift+h"
+
+    @classmethod
+    def on_call(cls, text_edit: QPlainTextEdit, parent=None):
+        cursor = text_edit.textCursor()
+        cursor.beginEditBlock()
+
+        cursor.movePosition(QTextCursor.MoveOperation.StartOfLine)
+        cursor.select(cursor.SelectionType.LineUnderCursor)
+
+        if cursor.selection().toPlainText().startswith('#'):
+            cursor.insertText(cursor.selection().toPlainText()[1:])
 
         cursor.endEditBlock()
 

@@ -1,8 +1,6 @@
 #!/bin/python3
 
 from functools import partial
-from importlib import util
-from os import path
 import sys
 from plugins.PluginsManager import PluginManager
 from widgets.SettingsDialog import SettingsDialog
@@ -35,7 +33,8 @@ from PyQt5.QtWidgets import (
     QMenu,
 )
 
-TOOLS = [AddImageTool, TableTool, BoldTool, ItalicTool, HeaderTool]
+TOOLS = [AddImageTool, TableTool, BoldTool,
+         ItalicTool, HeaderTool, DeleteHeaderTool]
 DEFAULT_SETTINGS = {
     SettingsNamesEnum.SERVER_ENDPOINT_ADDRESS: DEFAULT_SERVER,
     SettingsNamesEnum.USER_TOKEN: generate_user_token(),
