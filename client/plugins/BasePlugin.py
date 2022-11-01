@@ -17,6 +17,7 @@ class BasePlugin:
     NAME = "BasePlugin"  # NAME OF YOUR PLUGIN THAT SHOWS IN EDITOR
     SHORTCUT = None  # SHORTCUT FOR FUNCTION "on_call". MAY BE NONE
     AUTHOR = "Rodion Sarygin"  # AUTHOR CREDITS
+    DESCRIPTION = "BasePluginDescription"  # DESCRIPTION FOR PLUGIN
 
     @classmethod
     def on_init(cls, parent=None):

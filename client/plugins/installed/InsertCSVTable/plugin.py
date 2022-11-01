@@ -11,6 +11,7 @@ class Plugin(BasePlugin):
     NAME = "Вставить CSV таблицу из файла"
     SHORTCUT = None
     AUTHOR = "Rodion Sarygin"
+    DESCRIPTION = "Этот плагин вставляет таблицу в текущий документ из файла CSV таблицы."
 
     @classmethod
     def on_init(cls, parent=None):

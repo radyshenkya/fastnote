@@ -10,7 +10,7 @@ class PluginManager:
             try:
                 self.plugins.append(mod.Plugin)
             except Exception as e:
-                debug("Could not load plugin", mod.__name__)
+                debug("Could not load plugin", mod.__file__)
                 debug("Exception:", e)
 
     def init_plugins(self, parent=None):

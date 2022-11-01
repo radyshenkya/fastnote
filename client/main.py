@@ -2,6 +2,7 @@
 
 from functools import partial
 import sys
+from widgets.InfoWidget import InfoWidget
 from plugins.PluginsManager import PluginManager
 from widgets.SettingsDialog import SettingsDialog
 
@@ -29,6 +30,8 @@ from PyQt5.QtWidgets import (
     QApplication,
     QFileDialog,
     QInputDialog,
+    QVBoxLayout,
+    QDialog,
     QAction,
     QMenu,
 )
@@ -139,7 +142,24 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
                 partial(plugin.on_call, self.edit_panel, self)
             )
             plugin_menu.addAction(plugin_action)
+        plugin_menu.addSeparator()
+        plugin_details = QAction("Описания плагинов...", self)
+        plugin_details.triggered.connect(self.show_plugins_details)
+        plugin_menu.addAction(plugin_details)
         self.menu_bar.addMenu(plugin_menu)
+
+    def show_plugins_details(self):
+        details_dialog = QDialog(self)
+        details_dialog.setWindowTitle("Описания плагинов")
+
+        vertical_layout = QVBoxLayout(details_dialog)
+
+        for plugin in self.plugin_manager.plugins:
+            vertical_layout.addWidget(InfoWidget(
+                self, plugin.NAME, plugin.DESCRIPTION))
+
+        details_dialog.setLayout(vertical_layout)
+        details_dialog.show()
 
     def open_settings_dialog(self):
         def update_settings(changed_settings):

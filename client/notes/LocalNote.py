@@ -37,7 +37,7 @@ class LocalNote(INote):
         if is_file_exists(file_path):
             raise FileExistsError()
 
-        open(file_path, "a").close()
+        open(file_path, "a", encoding="utf-8").close()
         return LocalNote(file_path, "")
 
     @staticmethod

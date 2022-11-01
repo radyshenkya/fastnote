@@ -19,7 +19,8 @@ class RemoteNote(INote):
         super().__init__(text, readonly)
 
     def _save(self):
-        patch_note(self.server_point, self.user_token, self.note_id, self.text, False)
+        patch_note(self.server_point, self.user_token,
+                   self.note_id, self.text, False)
 
     def __str__(self) -> str:
         return f"{clear_address(self.server_point)}/{self.note_id}"
