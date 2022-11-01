@@ -16,7 +16,7 @@ class LocalNote(INote):
         super().__init__(text, readonly)
 
     def _save(self):
-        with open(self.file_path, "w") as f:
+        with open(self.file_path, "w", encoding="utf-8") as f:
             f.write(self.text)
 
     def __str__(self) -> str:
@@ -27,7 +27,7 @@ class LocalNote(INote):
         if not is_file_exists(file_path):
             raise FileNotFoundError()
 
-        with open(file_path, "r") as f:
+        with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
             f.close()
             return LocalNote(file_path, content)

@@ -1,8 +1,5 @@
 from pathlib import Path
 import json
-
-from requests import JSONDecodeError
-
 from utils import debug
 
 
@@ -11,7 +8,6 @@ class SettingsNamesEnum:
     USER_TOKEN = "user_token"
 
 
-# TODO: NE RABOTAET, PEREPISAT POD CSV FILE
 class SettingsManager:
     def __init__(self, file_path: str, default_settings) -> None:
         if not Path(file_path).is_file():
