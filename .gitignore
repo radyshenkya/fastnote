@@ -9,6 +9,8 @@ settings.json
 # C extensions
 *.so
 
+*.sqlite
+
 # Distribution / packaging
 .Python
 build/

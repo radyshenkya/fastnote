@@ -2,6 +2,7 @@
 
 from functools import partial
 import sys
+from RecentFilesManager import RecentFilesManager
 from widgets.InfoWidget import InfoWidget
 from plugins.PluginsManager import PluginManager
 from widgets.SettingsDialog import SettingsDialog
@@ -9,17 +10,14 @@ from widgets.SettingsDialog import SettingsDialog
 from ui import main_ui
 from utils import (
     alert_message_box,
-    debug,
-    get_rendered_markdown,
     generate_user_token,
-    list_files_in_dir,
     try_function,
 )
 
 from notes.LocalNote import LocalNote
 from notes.RemoteNote import RemoteNote
 
-from config import DEFAULT_SERVER, SETTINGS_FILE_PATH, PLUGINS_DIR_PATH
+from config import DEFAULT_SERVER, SETTINGS_FILE_PATH, PLUGINS_DIR_PATH, MAX_RECENT_FILES_IN_DB, RECENT_FILES_DB_PATH
 
 from settings_manager import SettingsManager, SettingsNamesEnum
 
@@ -53,6 +51,7 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         self.init_logic()
         self.init_toolbar()
         self.init_plugins()
+        self.init_recent_files()
 
     def init_ui(self):
         self.update_render_panel()
@@ -102,8 +101,8 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         open_settings_action.triggered.connect(self.open_settings_dialog)
 
         # MENU BAR
-        file_menu = QMenu("&Файл", self)
-        file_menu.addActions(
+        self.file_menu = QMenu("&Файл", self)
+        self.file_menu.addActions(
             [
                 new_action,
                 save_action,
@@ -115,7 +114,8 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
                 open_settings_action,
             ]
         )
-        self.menu_bar.addMenu(file_menu)
+
+        self.menu_bar.addMenu(self.file_menu)
 
     def init_toolbar(self):
         for tool in TOOLS:
@@ -125,6 +125,37 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
             new_action.triggered.connect(
                 partial(tool.on_call, self.edit_panel, self))
             self.toolBar.addAction(new_action)
+
+    def init_recent_files(self):
+        # Initing recent files manager
+        self.recent_files_manager = RecentFilesManager(
+            RECENT_FILES_DB_PATH, MAX_RECENT_FILES_IN_DB)
+
+        self.file_menu.addSeparator()
+        self.recent_files_actions = []
+
+        self.update_recent_files()
+
+    def update_recent_files(self):
+        # Removing all actions
+        for i in range(len(self.recent_files_actions)):
+            self.recent_files_actions[i].setParent(None)
+
+        self.recent_files_actions = []
+
+        # Adding new ones
+        for i, file_path in self.recent_files_manager.get_files():
+            def load_note_from_path(note_path: str):
+                self.note = LocalNote.get_or_create_file(note_path)
+                self.update_ui()
+                self.recent_files_manager.push(str(self.note))
+                self.update_recent_files()
+
+            open_file_action = QAction(file_path, self)
+            open_file_action.triggered.connect(
+                partial(load_note_from_path, file_path))
+            self.recent_files_actions.append(open_file_action)
+            self.file_menu.addAction(open_file_action)
 
     def init_plugins(self):
         # Loading plugin manager
@@ -212,6 +243,10 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         # Updating editor
         self.update_ui()
 
+        # Recent file update
+        self.recent_files_manager.push(str(self.note))
+        self.update_recent_files()
+
     def save_file_as(self, *args):
         file_name = QFileDialog.getSaveFileName(
             self, "Сохранить как", "", "Markdown Format (*.md);;All Files (*)"
@@ -244,7 +279,11 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         # Changing status bar
         self.statusBar.showMessage(str(self.note) + " saved!", 2000)
 
-    @try_function(fail_message="Либо данной записи нет, либо сервер не отвечает.")
+        if type(self.note) == LocalNote:
+            self.recent_files_manager.push(str(self.note))
+            self.update_recent_files()
+
+    @ try_function(fail_message="Либо данной записи нет, либо сервер не отвечает.")
     def open_remote(self, *args):
         id, ok_pressed = QInputDialog.getText(
             self, "Введите ID записи.", "ID:")
@@ -264,7 +303,7 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
 
             self.update_ui()
 
-    @try_function(fail_message="Проблемы с сервером")
+    @ try_function(fail_message="Проблемы с сервером")
     def upload_to_server(self, *args):
         server_enpoint = self.settings_manager.get_setting(
             SettingsNamesEnum.SERVER_ENDPOINT_ADDRESS,
