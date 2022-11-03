@@ -194,7 +194,7 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
 
         for plugin in self.plugin_manager.plugins:
             vertical_layout.addWidget(InfoWidget(
-                self, plugin.NAME, plugin.DESCRIPTION))
+                self, f"{plugin.NAME} (автор - {plugin.AUTHOR})", plugin.DESCRIPTION))
 
         details_dialog.setLayout(vertical_layout)
         details_dialog.show()

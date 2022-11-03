@@ -81,10 +81,10 @@ def try_function(fail_message="Error"):
 
 
 def table_to_markdown(table: List[List[str]]):
-    text = "|".join(table[0]) + "\n" + \
+    text = "|".join(map(str, table[0])) + "\n" + \
         "|".join(["---" for el in table[0]]) + "\n"
     for row in table[1:]:
-        text += "|".join(row) + "\n"
+        text += "|".join(map(str, row)) + "\n"
 
     return text
 
