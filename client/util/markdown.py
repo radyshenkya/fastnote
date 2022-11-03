@@ -1,11 +1,12 @@
 from jinja2 import Template
 from typing import List
 from markdown import markdown
+from config import ROOT_DIR_PATH
 import os
 
 _FILE_RENDER_TEMPLATE = Template(
     open(
-        os.getcwd() +
+        ROOT_DIR_PATH +
         "/templates/file_render.html"
     ).read()
 )
