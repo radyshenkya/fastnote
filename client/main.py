@@ -8,16 +8,13 @@ from plugins.PluginsManager import PluginManager
 from widgets.SettingsDialog import SettingsDialog
 
 from ui import main_ui
-from utils import (
-    alert_message_box,
-    generate_user_token,
-    try_function,
-)
+from utils import generate_user_token
+from util.decorators import try_function
 
 from notes.LocalNote import LocalNote
 from notes.RemoteNote import RemoteNote
 
-from config import DEFAULT_SERVER, SETTINGS_FILE_PATH, PLUGINS_DIR_PATH, MAX_RECENT_FILES_IN_DB, RECENT_FILES_DB_PATH
+from config import DEFAULT_SERVER, SETTINGS_FILE_PATH, PLUGINS_DIR_PATH, MAX_RECENT_FILES_IN_DB, RECENT_FILES_DB_PATH, LANG_MANAGER
 
 from settings_manager import SettingsManager, SettingsNamesEnum
 
@@ -69,39 +66,44 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
 
         # ACTIONS
         # new
-        new_action = QAction("Новый документ", self)
+        new_action = QAction(LANG_MANAGER.get(LANG_MANAGER.NEW_DOC), self)
         new_action.setShortcut("Ctrl+n")
         new_action.triggered.connect(self.new_file)
         # save
-        save_action = QAction("Сохранить", self)
+        save_action = QAction(LANG_MANAGER.get(LANG_MANAGER.SAVE_DOC), self)
         save_action.setShortcut("Ctrl+s")
         save_action.triggered.connect(self.save_file)
         # save as
-        save_as_action = QAction("Сохранить как", self)
+        save_as_action = QAction(LANG_MANAGER.get(
+            LANG_MANAGER.SAVE_AS_DOC), self)
         save_as_action.setShortcut("Ctrl+Shift+s")
         save_as_action.triggered.connect(self.save_file_as)
         # open
-        open_action = QAction("Открыть", self)
+        open_action = QAction(LANG_MANAGER.get(LANG_MANAGER.OPEN_DOC), self)
         open_action.setShortcut("Ctrl+o")
         open_action.triggered.connect(self.open_file)
         # open remote
-        open_remote_action = QAction("Открыть с сервера", self)
+        open_remote_action = QAction(LANG_MANAGER.get(
+            LANG_MANAGER.OPEN_REMOTE_DOC), self)
         open_remote_action.setShortcut("Ctrl+Shift+o")
         open_remote_action.triggered.connect(self.open_remote)
         # get notes from server
-        server_notes_list_action = QAction("Список записей с сервера", self)
+        server_notes_list_action = QAction(
+            LANG_MANAGER.get(LANG_MANAGER.LIST_REMOTE_DOC), self)
         server_notes_list_action.setShortcut("Ctrl+l")
         server_notes_list_action.triggered.connect(self.get_user_notes)
         # save to server
-        save_to_server_action = QAction("Загрузить на сервер", self)
+        save_to_server_action = QAction(
+            LANG_MANAGER.get(LANG_MANAGER.UPLOAD_DOC), self)
         save_to_server_action.setShortcut("Ctrl+u")
         save_to_server_action.triggered.connect(self.upload_to_server)
         # settings
-        open_settings_action = QAction("Настройки", self)
+        open_settings_action = QAction(
+            LANG_MANAGER.get(LANG_MANAGER.OPEN_SETTINGS), self)
         open_settings_action.triggered.connect(self.open_settings_dialog)
 
         # MENU BAR
-        self.file_menu = QMenu("&Файл", self)
+        self.file_menu = QMenu(LANG_MANAGER.get(LANG_MANAGER.FILE_MENU), self)
         # New document
         self.file_menu.addAction(new_action)
         self.file_menu.addSeparator()
@@ -170,7 +172,7 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         self.plugin_manager.init_plugins(self)
 
         # Creating plugin list
-        plugin_menu = QMenu("&Плагины", self)
+        plugin_menu = QMenu(LANG_MANAGER.get(LANG_MANAGER.PLUGINS_MENU), self)
 
         for plugin in self.plugin_manager.plugins:
             plugin_action = QAction(plugin.NAME, self)
@@ -181,20 +183,22 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
             )
             plugin_menu.addAction(plugin_action)
         plugin_menu.addSeparator()
-        plugin_details = QAction("Описания плагинов...", self)
+        plugin_details = QAction(LANG_MANAGER.get(
+            LANG_MANAGER.PLUGINS_DETAILS), self)
         plugin_details.triggered.connect(self.show_plugins_details)
         plugin_menu.addAction(plugin_details)
         self.menu_bar.addMenu(plugin_menu)
 
     def show_plugins_details(self):
         details_dialog = QDialog(self)
-        details_dialog.setWindowTitle("Описания плагинов")
+        details_dialog.setWindowTitle(
+            LANG_MANAGER.get(LANG_MANAGER.PLUGINS_DETAILS))
 
         vertical_layout = QVBoxLayout(details_dialog)
 
         for plugin in self.plugin_manager.plugins:
             vertical_layout.addWidget(InfoWidget(
-                self, f"{plugin.NAME} (автор - {plugin.AUTHOR})", plugin.DESCRIPTION))
+                self, f"{plugin.NAME} ({LANG_MANAGER.get(LANG_MANAGER.PLUGIN_AUTHOR_PREFIX)} - {plugin.AUTHOR})", plugin.DESCRIPTION))
 
         details_dialog.setLayout(vertical_layout)
         details_dialog.show()
@@ -211,11 +215,11 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
 
     def new_file(self):
         self.note = None
-        self.edit_panel.setPlainText("# Hello World")
+        self.edit_panel.setPlainText("")
         self.update_current_path_label()
         self.update_render_panel()
 
-    @try_function(fail_message="Проблемы с сервером")
+    @try_function(fail_message=LANG_MANAGER.get(LANG_MANAGER.ERR_SERVER_PROBLEMS))
     def get_user_notes(self, *args):
         server_enpoint = self.settings_manager.get_setting(
             SettingsNamesEnum.SERVER_ENDPOINT_ADDRESS,
@@ -239,7 +243,7 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
             )
             self.update_ui()
 
-    @try_function(fail_message="Файл не удалось открыть")
+    @try_function(fail_message=LANG_MANAGER.get(LANG_MANAGER.ERR_OPEN_NOTE))
     def open_file(self, *args):
         # Opening file
         file_name = QFileDialog.getOpenFileName(
@@ -254,30 +258,23 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         self.recent_files_manager.push(str(self.note))
         self.update_recent_files()
 
+    @try_function(fail_message=LANG_MANAGER.get(LANG_MANAGER.ERR_SAVE_NOTE))
     def save_file_as(self, *args):
         file_name = QFileDialog.getSaveFileName(
-            self, "Сохранить как", "", "Markdown Format (*.md);;All Files (*)"
+            self, LANG_MANAGER.get(
+                LANG_MANAGER.SAVE_AS_DOC), "", "Markdown Format (*.md);;All Files (*)"
         )[0]
 
-        try:
-            self.note = LocalNote.get_or_create_file(file_name)
-            self.save_file()
-        except FileNotFoundError as e:
-            self.note = None
-            alert_message_box("Ошибка!", "Файл не удалось сохранить.")
+        self.note = LocalNote.get_or_create_file(file_name)
+        self.save_file()
 
-    @try_function(fail_message="Ошибка при сохранении файла!")
+    @try_function(fail_message=LANG_MANAGER.get(LANG_MANAGER.ERR_SAVE_NOTE))
     def save_file(self, *args):
         if self.note is None:
             self.save_file_as()
             return
 
-        if self.note.readonly:
-            alert_message_box(
-                "Ошибка!",
-                "Данная запись предназначена только для чтения. Если вы хотите ее редактировать, нажмите на кнопку SAVE AS.",
-            )
-            return
+        assert not self.note.readonly
         self.note.set_text(self.edit_panel.toPlainText())
         self.note.save()
 
@@ -290,10 +287,10 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
             self.recent_files_manager.push(str(self.note))
             self.update_recent_files()
 
-    @ try_function(fail_message="Либо данной записи нет, либо сервер не отвечает.")
+    @try_function(fail_message=LANG_MANAGER.get(LANG_MANAGER.ERR_NOTE_NOT_FOUND))
     def open_remote(self, *args):
         id, ok_pressed = QInputDialog.getText(
-            self, "Введите ID записи.", "ID:")
+            self, LANG_MANAGER.get(LANG_MANAGER.OPEN_REMOTE_DOC), "ID:")
 
         if ok_pressed:
             server_enpoint = self.settings_manager.get_setting(
@@ -310,7 +307,7 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
 
             self.update_ui()
 
-    @ try_function(fail_message="Проблемы с сервером")
+    @try_function(fail_message=LANG_MANAGER.get(LANG_MANAGER.ERR_SERVER_PROBLEMS))
     def upload_to_server(self, *args):
         server_enpoint = self.settings_manager.get_setting(
             SettingsNamesEnum.SERVER_ENDPOINT_ADDRESS,

@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QTextBrowser
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QPixmap, QDesktopServices
-from utils import compare_lists, debug
+from util.debug import debug
 
 from threads.MarkdownTranslator import MarkdownTranslatorThread
 

@@ -3,13 +3,15 @@ from text_edit_tools.BaseTool import BaseTool
 from PyQt5.QtWidgets import QPlainTextEdit, QInputDialog
 from PyQt5.QtGui import QTextCursor
 
+
+from config import LANG_MANAGER
 from widgets.TableDialog import TableDialog
 
 # Add image template at cursor position
 
 
 class AddImageTool(BaseTool):
-    NAME = "Добавить картинку (Ctrl+Shift+i)"
+    NAME = f"{LANG_MANAGER.get(LANG_MANAGER.ADD_IMAGE_TOOL)} (Ctrl+Shift+i)"
     SHORTCUT = "Ctrl+Shift+i"
 
     @classmethod
@@ -57,19 +59,19 @@ class SelectedTextStyleTool(BaseTool):
 
 
 class BoldTool(SelectedTextStyleTool):
-    NAME = "Жирный шрифт (Ctrl+b)"
+    NAME = f"{LANG_MANAGER.get(LANG_MANAGER.BOLD_FONT_TOOL)} (Ctrl+b)"
     SHORTCUT = "Ctrl+b"
     APPEND_SYMBOLS = "**"
 
 
 class ItalicTool(SelectedTextStyleTool):
-    NAME = "Курсив (Ctrl+i)"
+    NAME = f"{LANG_MANAGER.get(LANG_MANAGER.ITALIC_FONT_TOOL)} (Ctrl+i)"
     SHORTCUT = "Ctrl+i"
     APPEND_SYMBOLS = "*"
 
 
 class HeaderTool(BaseTool):
-    NAME = "Заголовок (Ctrl+h)"
+    NAME = f"{LANG_MANAGER.get(LANG_MANAGER.ADD_HEADER_TOOL)} (Ctrl+h)"
     SHORTCUT = "Ctrl+h"
 
     @classmethod
@@ -87,7 +89,7 @@ class HeaderTool(BaseTool):
 
 
 class DeleteHeaderTool(BaseTool):
-    NAME = "Убрать заголовок (Ctrl+Shift+h)"
+    NAME = f"{LANG_MANAGER.get(LANG_MANAGER.REMOVE_HEADER_TOOL)} (Ctrl+Shift+h)"
     SHORTCUT = "Ctrl+Shift+h"
 
     @classmethod
@@ -105,7 +107,7 @@ class DeleteHeaderTool(BaseTool):
 
 
 class TableTool(BaseTool):
-    NAME = "Новая таблица (Ctrl+t)"
+    NAME = f"{LANG_MANAGER.get(LANG_MANAGER.NEW_TABLE_TOOL)} (Ctrl+t)"
     SHORTCUT = "Ctrl+t"
 
     @classmethod

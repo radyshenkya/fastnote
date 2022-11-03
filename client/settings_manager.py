@@ -1,6 +1,6 @@
 from pathlib import Path
 import json
-from utils import debug
+from util.debug import debug
 
 
 class SettingsNamesEnum:

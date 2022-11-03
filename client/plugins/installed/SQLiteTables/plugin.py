@@ -1,7 +1,8 @@
 from plugins.BasePlugin import BasePlugin
 from PyQt5.QtWidgets import QPlainTextEdit, QFileDialog, QInputDialog
 from PyQt5.QtGui import QTextCursor
-from utils import table_to_markdown, debug
+from util.debug import debug
+from utils import table_to_markdown
 from pathlib import Path
 
 import sqlite3
