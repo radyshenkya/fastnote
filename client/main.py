@@ -2,13 +2,13 @@
 
 from functools import partial
 import sys
-from RecentFilesManager import RecentFilesManager
+from managers.recent_files import RecentFilesManager
 from widgets.InfoWidget import InfoWidget
-from plugins.PluginsManager import PluginManager
+from managers.plugins import PluginManager
 from widgets.SettingsDialog import SettingsDialog
 
 from ui import main_ui
-from utils import generate_user_token
+from util.server import generate_user_token
 from util.decorators import try_function
 
 from notes.LocalNote import LocalNote
@@ -16,7 +16,7 @@ from notes.RemoteNote import RemoteNote
 
 from config import DEFAULT_SERVER, SETTINGS_FILE_PATH, PLUGINS_DIR_PATH, MAX_RECENT_FILES_IN_DB, RECENT_FILES_DB_PATH, LANG_MANAGER
 
-from settings_manager import SettingsManager, SettingsNamesEnum
+from managers.settings import SettingsManager, SettingsNamesEnum
 
 from text_edit_tools.Tools import *
 
@@ -44,11 +44,11 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         super().__init__()
 
         self.setupUi(self)
-        self.init_ui()
         self.init_logic()
         self.init_toolbar()
         self.init_plugins()
         self.init_recent_files()
+        self.init_ui()
 
     def init_ui(self):
         self.update_render_panel()

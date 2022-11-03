@@ -1,4 +1,4 @@
-from utils import table_to_markdown
+from util.markdown import table_to_markdown
 from text_edit_tools.BaseTool import BaseTool
 from PyQt5.QtWidgets import QPlainTextEdit, QInputDialog
 from PyQt5.QtGui import QTextCursor

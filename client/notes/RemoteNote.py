@@ -1,5 +1,5 @@
 from notes.INote import INote
-from server_io import *
+from util.server import *
 
 
 class RemoteNote(INote):

@@ -1,7 +1,7 @@
 from plugins.BasePlugin import BasePlugin
 from PyQt5.QtWidgets import QPlainTextEdit, QFileDialog
 from PyQt5.QtGui import QTextCursor
-from utils import table_to_markdown
+from util.markdown import table_to_markdown
 from pathlib import Path
 
 import csv

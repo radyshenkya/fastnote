@@ -1,5 +1,15 @@
 import requests
 import json
+from random import choices
+from hashlib import md5
+
+
+def generate_user_token() -> str:
+    USER_TOKEN_ITERATIONS = 32
+    GENERATION_ALPHABET = "abcdefghijklmnopqrst1234567890"
+    return md5(
+        ("".join(choices(GENERATION_ALPHABET, k=USER_TOKEN_ITERATIONS))).encode("utf-8")
+    ).hexdigest()
 
 
 def clear_address(address: str) -> str:
@@ -61,7 +71,8 @@ def is_owned_note(server_point: str, user_token, id: str) -> bool:
 
 
 def get_note_details(server_point: str, user_token: str, id: str):
-    res = requests.get(f"{clear_address(server_point)}/api/{user_token}/note/{id}")
+    res = requests.get(
+        f"{clear_address(server_point)}/api/{user_token}/note/{id}")
     assert_status(res.status_code, 200)
 
     json_obj = json.loads(res.content)
@@ -84,7 +95,8 @@ def patch_note(
 
 
 def delete_note(server_point: str, user_token: str, id: str):
-    res = requests.delete(f"{clear_address(server_point)}/api/{user_token}/note/{id}")
+    res = requests.delete(
+        f"{clear_address(server_point)}/api/{user_token}/note/{id}")
     assert_status(res.status_code, 200)
 
     json_obj = json.loads(res.content)

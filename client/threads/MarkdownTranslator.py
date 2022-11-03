@@ -1,6 +1,6 @@
 from PyQt5.QtCore import QThread, pyqtSignal
 
-from utils import get_rendered_markdown
+from util.markdown import get_rendered_markdown
 
 
 class MarkdownTranslatorThread(QThread):

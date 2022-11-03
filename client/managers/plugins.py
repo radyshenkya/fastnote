@@ -1,6 +1,6 @@
 from os import path
 from util.debug import debug
-from utils import list_dirs_in_dir, load_module_from_file
+from util.files import list_dirs_in_dir, load_module_from_file
 
 
 class PluginManager:
