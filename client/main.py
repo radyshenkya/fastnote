@@ -102,18 +102,25 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
 
         # MENU BAR
         self.file_menu = QMenu("&Файл", self)
-        self.file_menu.addActions(
-            [
-                new_action,
-                save_action,
-                save_as_action,
-                save_to_server_action,
-                server_notes_list_action,
-                open_action,
-                open_remote_action,
-                open_settings_action,
-            ]
-        )
+        # New document
+        self.file_menu.addAction(new_action)
+        self.file_menu.addSeparator()
+        # Local files
+        self.file_menu.addActions([
+            open_action,
+            save_action,
+            save_as_action
+        ])
+        self.file_menu.addSeparator()
+        # Remote notes
+        self.file_menu.addActions([
+            open_remote_action,
+            server_notes_list_action,
+            save_to_server_action
+        ])
+        self.file_menu.addSeparator()
+        # Settings
+        self.file_menu.addAction(open_settings_action)
 
         self.menu_bar.addMenu(self.file_menu)
 
