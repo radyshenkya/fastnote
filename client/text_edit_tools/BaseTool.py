@@ -1,7 +1,11 @@
-from PyQt5.QtWidgets import QPlainTextEdit
-from PyQt5.QtGui import QTextCursor
+"""
+Base class for tools on "EditTools" row in editor.
+It is very similar to BasePlugin, instead this class do not have on_init() method and AUTHOR field.
+"""
 
-# FOR HELP IN ADDING TOOLS: https://doc.qt.io/qt-5/richtext-cursor.html#cursor-based-editing
+from PyQt5.QtWidgets import QPlainTextEdit
+
+
 class BaseTool:
     NAME = "BaseTool"
     SHORTCUT = None
@@ -9,8 +13,3 @@ class BaseTool:
     @classmethod
     def on_call(cls, text_edit: QPlainTextEdit, parent=None):
         raise NotImplementedError()
-        # cursor = text_edit.textCursor()
-        # cursor.beginEditBlock()
-        # cursor.movePosition(QTextCursor.MoveOperation.StartOfLine)
-        # cursor.insertText("[BASETOOL]")
-        # cursor.endEditBlock()

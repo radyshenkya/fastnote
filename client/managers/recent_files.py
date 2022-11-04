@@ -1,3 +1,7 @@
+"""
+Recent files manager - loads recent files pathes from database
+and gives api for them.
+"""
 import sqlite3
 
 DATABASE_INITIALIZING_SCRIPT = """

@@ -1,12 +1,17 @@
+"""
+Realization of BaseNote class.
+Gives api for saving and loading files from local computer.
+"""
+
 from pathlib import Path
-from notes.INote import INote
+from notes.BaseNote import BaseNote
 
 
 def is_file_exists(file_path: str):
     return Path(file_path).is_file()
 
 
-class LocalNote(INote):
+class LocalNote(BaseNote):
     def __init__(self, file_path, text: str, readonly=False) -> None:
         self.file_path = file_path
 

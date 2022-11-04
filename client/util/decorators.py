@@ -1,3 +1,7 @@
+"""
+Decorators file
+"""
+
 from config import LANG_MANAGER
 from util.pyqt import alert_message_box
 

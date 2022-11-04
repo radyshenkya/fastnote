@@ -1,3 +1,7 @@
+"""
+Basic tools for editing at row "EditTools" in editor
+"""
+
 from util.markdown import table_to_markdown
 from text_edit_tools.BaseTool import BaseTool
 from PyQt5.QtWidgets import QPlainTextEdit, QInputDialog

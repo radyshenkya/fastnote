@@ -1,3 +1,7 @@
+"""
+Settings manager - loads settings from json file
+and gives small api for getting variables from setting files
+"""
 from pathlib import Path
 import json
 from util.debug import debug

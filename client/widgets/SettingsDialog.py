@@ -1,8 +1,10 @@
-from PyQt5.QtWidgets import QDialog
+"""
+Dialog for changing dict values
+"""
+
+from PyQt5.QtWidgets import QLineEdit, QDialog
 
 from ui.settings_dialog_ui import Ui_Dialog
-
-from PyQt5.QtWidgets import QLineEdit
 
 
 class SettingsDialog(QDialog, Ui_Dialog):

@@ -1,3 +1,7 @@
+"""
+Utils for filesystem
+"""
+
 from importlib import util
 import os
 from types import ModuleType

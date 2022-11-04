@@ -1,7 +1,12 @@
+"""
+Language manager - loads phrases for program from json file into dictionary,
+and gives small api for getting values from this dict.
+
+"""
+
 from json import load
 
 from util.debug import debug
-from util.pyqt import alert_message_box
 
 
 class LanguageManager:
@@ -40,7 +45,7 @@ class LanguageManager:
         except Exception as e:
             print("Can not load language file " + json_file_path +
                   ".\nRename one of files in language directory into \"default.json\" to start program.")
-            exit(-1)
+            self.lang = {}
 
     def get(self, string_id: str):
         res = self.lang.get(string_id, None)

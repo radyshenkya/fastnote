@@ -1,8 +1,11 @@
+"""
+Utils for markdown content
+"""
+
 from jinja2 import Template
 from typing import List
 from markdown import markdown
 from config import ROOT_DIR_PATH
-import os
 
 _FILE_RENDER_TEMPLATE = Template(
     open(

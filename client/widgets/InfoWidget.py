@@ -1,3 +1,7 @@
+"""
+Widget with title and markdown text as body
+"""
+
 from PyQt5.QtWidgets import QWidget
 from ui.plugin_details_item import Ui_Form
 

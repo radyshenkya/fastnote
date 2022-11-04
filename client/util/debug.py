@@ -1,3 +1,7 @@
+"""
+Debug functions
+"""
+
 DEBUG_MESSAGES = True
 
 

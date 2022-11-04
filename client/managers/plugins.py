@@ -1,3 +1,6 @@
+"""Plugins manager - loads plugins modules from given directory
+and gives all Plugin classes from this modules"""
+
 from os import path
 from util.debug import debug
 from util.files import list_dirs_in_dir, load_module_from_file

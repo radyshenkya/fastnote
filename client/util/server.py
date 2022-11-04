@@ -1,3 +1,7 @@
+"""
+Utils for server api
+"""
+
 import requests
 import json
 from random import choices

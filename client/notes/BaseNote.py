@@ -1,4 +1,11 @@
-class INote:
+"""
+Base class for notes.
+Do not have implementation for saving notes, instead throws NotImplementedError.
+DO NOT USE THIS CLASS IN ANY OTHER MODULES INSTEAD OF REALIZATIONS OF THIS CLASS
+"""
+
+
+class BaseNote:
     """
     Base class for note edits
     """

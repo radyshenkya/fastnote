@@ -1,8 +1,10 @@
+"""
+Dialog for table creating
+"""
+
 from PyQt5.QtWidgets import QDialog
 
 from ui.table_dialog_ui import Ui_Dialog
-
-from PyQt5.QtWidgets import QLineEdit
 
 
 class TableDialog(QDialog, Ui_Dialog):

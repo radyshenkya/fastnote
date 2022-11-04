@@ -1,6 +1,10 @@
+"""
+Global constants for program
+"""
+
 import os
 
-from language import LanguageManager
+from managers.language import LanguageManager
 
 ROOT_DIR_PATH = os.path.dirname(__file__)
 

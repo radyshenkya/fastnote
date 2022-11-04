@@ -1,3 +1,7 @@
+"""
+Thread for markdown convertion into html
+"""
+
 from PyQt5.QtCore import QThread, pyqtSignal
 
 from util.markdown import get_rendered_markdown

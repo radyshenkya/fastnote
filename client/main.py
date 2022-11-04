@@ -1,25 +1,29 @@
-#!/bin/python3
+"""
+Main class of program, UI logic.
+"""
 
+# STD Lib
 from functools import partial
 import sys
+# Managers
 from managers.recent_files import RecentFilesManager
-from widgets.InfoWidget import InfoWidget
+from managers.settings import SettingsManager, SettingsNamesEnum
 from managers.plugins import PluginManager
-from widgets.SettingsDialog import SettingsDialog
-
+# Widgets and ui
 from ui import main_ui
-from util.server import generate_user_token
+from widgets.InfoWidget import InfoWidget
+from widgets.SettingsDialog import SettingsDialog
+# Utils
 from util.decorators import try_function
-
+from util.server import generate_user_token
+# Note classes
 from notes.LocalNote import LocalNote
 from notes.RemoteNote import RemoteNote
-
+# Config constants
 from config import DEFAULT_SERVER, SETTINGS_FILE_PATH, PLUGINS_DIR_PATH, MAX_RECENT_FILES_IN_DB, RECENT_FILES_DB_PATH, LANG_MANAGER
-
-from managers.settings import SettingsManager, SettingsNamesEnum
-
+# text editing tools
 from text_edit_tools.Tools import *
-
+# PyQt5 includes
 from PyQt5.QtWidgets import (
     QMainWindow,
     QApplication,
@@ -30,6 +34,7 @@ from PyQt5.QtWidgets import (
     QAction,
     QMenu,
 )
+
 
 TOOLS = [AddImageTool, TableTool, BoldTool,
          ItalicTool, HeaderTool, DeleteHeaderTool]

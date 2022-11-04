@@ -1,12 +1,14 @@
+"""
+BasePlugin - class that every plugin must realise.
+To create your own plugin you need to create new folder (with any name) in folder ./plugins/installed/
+In this folder you need to create file plugin.py, where you will make class Plugin(BasePlugin)
+"""
+
 from PyQt5.QtWidgets import QPlainTextEdit
 
 
 class BasePlugin:
     """
-    Base plugin class for fastnote plugins.
-    Realise this class in new file in folder plugins with class called "Plugin"
-
-    Static attributes that you may change:
     NAME - NAME OF YOUR PLUGIN THAT SHOWS IN EDITOR
     SHORTCUT - SHORTCUT FOR FUNCTION "on_call". MAY BE NONE
     AUTHOR - AUTHOR CREDITS

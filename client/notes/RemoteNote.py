@@ -1,8 +1,13 @@
-from notes.INote import INote
+"""
+Realization of BaseNote class.
+Gives api for loading and saving remote notes on server.
+"""
+
+from notes.BaseNote import BaseNote
 from util.server import *
 
 
-class RemoteNote(INote):
+class RemoteNote(BaseNote):
     def __init__(
         self,
         user_token: str,

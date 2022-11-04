@@ -1,3 +1,7 @@
+"""
+Small functions based on pyqt
+"""
+
 from PyQt5.QtWidgets import QMessageBox
 
 

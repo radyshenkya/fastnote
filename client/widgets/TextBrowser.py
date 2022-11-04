@@ -1,3 +1,8 @@
+"""
+TextBrowser with custom resource loading, anchors opening and
+text set method
+"""
+
 from PyQt5.QtWidgets import QTextBrowser
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QPixmap, QDesktopServices
@@ -6,8 +11,6 @@ from util.debug import debug
 from threads.MarkdownTranslator import MarkdownTranslatorThread
 
 import requests
-
-# QTextBrowser with custom resource loading, setText method and anchors opening
 
 
 class TextBrowser(QTextBrowser):
