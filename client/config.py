@@ -16,3 +16,5 @@ LANGUAGE_FILE = ROOT_DIR_PATH + "/languages/default.json"
 MAX_RECENT_FILES_IN_DB = 10
 
 LANG_MANAGER = LanguageManager(LANGUAGE_FILE)
+
+STATUS_BAR_SAVE_DELAY_MESSAGE = 2000  # in millis

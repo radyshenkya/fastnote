@@ -25,6 +25,6 @@
     "err_readonly_note": "Запись только для чтения",
     "statusbar_save_postfix": "сохранено",
     "err_note_not_found": "Не удалось найти запись",
-    "unsaved_file_name": "не сохраненная запись",
+    "unsaved_file_name": "несохраненная запись",
     "error": "Ошибка"
 }

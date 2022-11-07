@@ -12,6 +12,7 @@ class BasePlugin:
     NAME - NAME OF YOUR PLUGIN THAT SHOWS IN EDITOR
     SHORTCUT - SHORTCUT FOR FUNCTION "on_call". MAY BE NONE
     AUTHOR - AUTHOR CREDITS
+    DESCRIPTION - DETAILS ABOUT PLUGIN, MAY BE IN MARKDOWN, SHOWS IN PLUGINS DETAILS
 
     Realise plugin logic at on_init() and on_call() methods
     """

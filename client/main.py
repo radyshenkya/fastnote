@@ -1,5 +1,5 @@
 """
-Main class of program, UI logic.
+Main class of program, connecting all modules in one program.
 """
 
 # STD Lib
@@ -20,7 +20,7 @@ from util.server import generate_user_token
 from notes.LocalNote import LocalNote
 from notes.RemoteNote import RemoteNote
 # Config constants
-from config import DEFAULT_SERVER, SETTINGS_FILE_PATH, PLUGINS_DIR_PATH, MAX_RECENT_FILES_IN_DB, RECENT_FILES_DB_PATH, LANG_MANAGER
+from config import DEFAULT_SERVER, SETTINGS_FILE_PATH, PLUGINS_DIR_PATH, MAX_RECENT_FILES_IN_DB, RECENT_FILES_DB_PATH, LANG_MANAGER, STATUS_BAR_SAVE_DELAY_MESSAGE
 # text editing tools
 from text_edit_tools.Tools import *
 # PyQt5 includes
@@ -286,7 +286,8 @@ class MainWindow(QMainWindow, main_ui.Ui_MainWindow):
         self.update_current_path_label()
 
         # Changing status bar
-        self.statusBar.showMessage(str(self.note) + " saved!", 2000)
+        self.statusBar.showMessage(
+            str(self.note) + " saved!", STATUS_BAR_SAVE_DELAY_MESSAGE)
 
         if type(self.note) == LocalNote:
             self.recent_files_manager.push(str(self.note))
